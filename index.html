@@ -2,114 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Art by Me - lily</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Art By Me - lily</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #ffeef6;
-      color: #4a4a4a;
-    }
-
-    header {
-      background-color: #ffcce0;
+      background-image: url('https://i.pinimg.com/736x/0e/a3/61/0ea3610815d34274c68a3663f4047046.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      padding: 20px;
       text-align: center;
-      padding: 2rem 1rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    header h1 {
+      min-height: 100vh;
       margin: 0;
-      font-size: 2.5rem;
-      color: #b30059;
     }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-      max-width: 1000px;
-      margin: auto;
+    /* subtle overlay so text stays readable */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 230, 240, 0.6);
+      z-index: -1;
     }
-
-    .art-card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      overflow: hidden;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .art-card:hover {
-      transform: scale(1.02);
-    }
-
-    .art-card img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-    }
-
-    .art-card h3 {
-      margin: 1rem 0 0.5rem;
-      color: #cc0066;
-    }
-
-    .buy-btn {
+    .art-piece {
+      margin-bottom: 40px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(214, 125, 160, 0.4);
       display: inline-block;
-      margin: 1rem 0 1.5rem;
-      padding: 0.6rem 1.5rem;
-      background-color: #ff99cc;
+      max-width: 400px;
+      width: 90%;
+    }
+    .art-piece img {
+      width: 100%;
+      max-width: 380px;
+      height: 280px;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(214, 125, 160, 0.4);
+      background: white;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .price {
+      font-size: 1.2rem;
+      color: #d67da0;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .pay-button {
+      display: inline-block;
+      background-color: #ff94c2;
       color: white;
-      border: none;
-      border-radius: 8px;
+      padding: 10px 20px;
+      border-radius: 25px;
       text-decoration: none;
       font-weight: bold;
+      margin-top: 10px;
       transition: background-color 0.3s ease;
     }
-
-    .buy-btn:hover {
-      background-color: #ff66b2;
+    .pay-button:hover {
+      background-color: #e06ba8;
     }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #ffd6e8;
-      color: #6c6c6c;
-      font-size: 0.9rem;
+    h1 {
+      color: #d67da0;
+      margin-bottom: 40px;
+      text-shadow: 1px 1px 3px #fff;
     }
   </style>
 </head>
 <body>
+  <h1>Welcome to My Art Gallery 💖</h1>
 
-  <header>
-    <h1>Welcome to My Art Gallery 💖</h1>
-    <p>Each piece is made with love by lily ✨</p>
-  </header>
+  <div class="art-piece">
+    <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
+    <p class="price">Price: $4</p>
+    <a href="https://www.paypal.me/YourPayPalID/4" target="_blank" class="pay-button">Pay $4 Now</a>
+  </div>
 
-  <section class="gallery">
-    <div class="art-card">
-      <img src="https://via.placeholder.com/400x250?text=Art+1" alt="Art 1">
-      <h3>Dreamy Sunset</h3>
-      <a href="mailto:your@email.com?subject=I want to buy Dreamy Sunset!" class="buy-btn">Contact to Buy</a>
-    </div>
+  <div class="art-piece">
+    <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 2" />
+    <p class="price">Price: $8</p>
+    <a href="https://www.paypal.me/YourPayPalID/8" target="_blank" class="pay-button">Pay $8 Now</a>
+  </div>
 
-    <div class="art-card">
-      <img src="https://via.placeholder.com/400x250?text=Art+2" alt="Art 2">
-      <h3>Cherry Blossom Girl</h3>
-      <a href="mailto:your@email.com?subject=I want to buy Cherry Blossom Girl!" class="buy-btn">Contact to Buy</a>
-    </div>
+  <div class="art-piece">
+    <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 3" />
+    <p class="price">Price: $6</p>
+    <a href="https://www.paypal.me/YourPayPalID/6" target="_blank" class="pay-button">Pay $6 Now</a>
+  </div>
 
-    <div class="art-card">
-      <img src="https://via.placeholder.com/400x250?text=Art+3" alt="Art 3">
-      <h3>Moonlit Garden</h3>
-      <a href="mailto:your@email.com?subject=I want to buy Moonlit Garden!" class="buy-btn">Contact to Buy</a>
-    </div>
-  </section>
+</body>
+</html>
+
+
 
   <footer>
     &copy; 2025 by Lily1Art | All art is original 💕
