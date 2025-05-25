@@ -2,131 +2,118 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wiam's Art Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Art by Me - lily</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9f9f9;
       margin: 0;
-      padding: 20px;
-      color: #333;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffeef6;
+      color: #4a4a4a;
     }
+
     header {
+      background-color: #ffcce0;
       text-align: center;
-      margin-bottom: 40px;
+      padding: 2rem 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
+
     header h1 {
-      font-size: 3em;
       margin: 0;
-      color: #5c4d7d;
+      font-size: 2.5rem;
+      color: #b30059;
     }
+
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
       max-width: 1000px;
-      margin: 0 auto;
+      margin: auto;
     }
+
     .art-card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      text-align: center;
+      transition: transform 0.3s ease;
     }
+
+    .art-card:hover {
+      transform: scale(1.02);
+    }
+
     .art-card img {
       width: 100%;
-      height: auto;
-      display: block;
+      height: 250px;
+      object-fit: cover;
     }
-    .art-info {
-      padding: 15px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+
+    .art-card h3 {
+      margin: 1rem 0 0.5rem;
+      color: #cc0066;
     }
-    .art-info h2 {
-      margin: 0 0 10px 0;
-      font-size: 1.2em;
-      color: #5c4d7d;
-    }
-    .art-info p {
-      flex-grow: 1;
-      margin: 0 0 15px 0;
-      font-size: 0.9em;
-      color: #555;
-    }
-    .price {
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #2b7a78;
-    }
+
     .buy-btn {
-      background: #3aafa9;
+      display: inline-block;
+      margin: 1rem 0 1.5rem;
+      padding: 0.6rem 1.5rem;
+      background-color: #ff99cc;
       color: white;
-      padding: 10px 15px;
       border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      text-align: center;
-      font-weight: bold;
-      transition: background 0.3s ease;
+      border-radius: 8px;
       text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
     }
+
     .buy-btn:hover {
-      background: #2b7a78;
+      background-color: #ff66b2;
     }
+
     footer {
       text-align: center;
-      margin-top: 40px;
-      color: #777;
-      font-size: 0.8em;
+      padding: 1rem;
+      background-color: #ffd6e8;
+      color: #6c6c6c;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Wiam's Art Gallery</h1>
-    <p>Beautiful art pieces for your collection</p>
+    <h1>Welcome to My Art Gallery 💖</h1>
+    <p>Each piece is made with love by lily ✨</p>
   </header>
 
   <section class="gallery">
     <div class="art-card">
-      <img src="https://via.placeholder.com/400x300.png?text=Art+1" alt="Art 1" />
-      <div class="art-info">
-        <h2>Sunset Dreams</h2>
-        <p>A dreamy landscape painting with warm sunset colors.</p>
-        <div class="price">$40</div>
-        <a class="buy-btn" href="mailto:your-email@example.com?subject=Buying%20Sunset%20Dreams&body=Hi%20Wiam,%20I%20want%20to%20buy%20your%20art%20'Sunset%20Dreams'.">Buy Now</a>
-      </div>
+      <img src="https://via.placeholder.com/400x250?text=Art+1" alt="Art 1">
+      <h3>Dreamy Sunset</h3>
+      <a href="mailto:your@email.com?subject=I want to buy Dreamy Sunset!" class="buy-btn">Contact to Buy</a>
     </div>
 
     <div class="art-card">
-      <img src="https://via.placeholder.com/400x300.png?text=Art+2" alt="Art 2" />
-      <div class="art-info">
-        <h2>Ocean Waves</h2>
-        <p>A calming seascape with blues and greens to soothe your soul.</p>
-        <div class="price">$50</div>
-        <a class="buy-btn" href="mailto:your-email@example.com?subject=Buying%20Ocean%20Waves&body=Hi%20Wiam,%20I%20want%20to%20buy%20your%20art%20'Ocean%20Waves'.">Buy Now</a>
-      </div>
+      <img src="https://via.placeholder.com/400x250?text=Art+2" alt="Art 2">
+      <h3>Cherry Blossom Girl</h3>
+      <a href="mailto:your@email.com?subject=I want to buy Cherry Blossom Girl!" class="buy-btn">Contact to Buy</a>
     </div>
 
     <div class="art-card">
-      <img src="https://via.placeholder.com/400x300.png?text=Art+3" alt="Art 3" />
-      <div class="art-info">
-        <h2>Floral Bliss</h2>
-        <p>Bright and colorful floral art to brighten your room.</p>
-        <div class="price">$35</div>
-        <a class="buy-btn" href="mailto:your-email@example.com?subject=Buying%20Floral%20Bliss&body=Hi%20Wiam,%20I%20want%20to%20buy%20your%20art%20'Floral%20Bliss'.">Buy Now</a>
-      </div>
+      <img src="https://via.placeholder.com/400x250?text=Art+3" alt="Art 3">
+      <h3>Moonlit Garden</h3>
+      <a href="mailto:your@email.com?subject=I want to buy Moonlit Garden!" class="buy-btn">Contact to Buy</a>
     </div>
   </section>
 
   <footer>
-    &copy; 2025 Wiam's Art Gallery - Made with ❤️ by your boyfriend Dan
+    &copy; 2025 by Lily1Art | All art is original 💕
   </footer>
+
 </body>
 </html>
