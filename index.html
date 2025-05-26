@@ -2,91 +2,100 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Art by Lily</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Art By Me</title>
   <style>
     body {
       background-image: url('https://i.pinimg.com/736x/0e/a3/61/0ea3610815d34274c68a3663f4047046.jpg');
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #444;
-      margin: 0;
-      padding: 0;
-    }
-
-    h1 {
-      text-align: center;
-      color: #ffb6c1;
-      margin-top: 30px;
-    }
-
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px;
-      padding: 40px;
-    }
-
-    .art {
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      color: #333;
       padding: 20px;
       text-align: center;
-      width: 300px;
+      min-height: 100vh;
+      margin: 0;
     }
-
-    .art img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 10px;
+    /* subtle overlay so text stays readable */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 230, 240, 0.6);
+      z-index: -1;
     }
-
-    .price {
+    .art-piece {
+      margin-bottom: 40px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(214, 125, 160, 0.4);
       display: inline-block;
-      margin-top: 15px;
-      background-color: #ffb6c1;
+      max-width: 400px;
+      width: 90%;
+    }
+    .art-piece img {
+      width: 100%;
+      max-width: 380px;
+      height: 280px;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(214, 125, 160, 0.4);
+      background: white;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .price {
+      font-size: 1.2rem;
+      color: #d67da0;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .pay-button {
+      display: inline-block;
+      background-color: #ff94c2;
       color: white;
       padding: 10px 20px;
       border-radius: 25px;
-      font-weight: bold;
       text-decoration: none;
-      transition: 0.3s;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
     }
-
-    .price:hover {
-      background-color: #ff69b4;
+    .pay-button:hover {
+      background-color: #e06ba8;
+    }
+    h1 {
+      color: #d67da0;
+      margin-bottom: 40px;
+      text-shadow: 1px 1px 3px #fff;
     }
   </style>
 </head>
 <body>
-  <h1>Art by Lily 🎨💖</h1>
+  <h1>Welcome to My Art Gallery 💖</h1>
 
-  <div class="gallery">
-    <!-- Art 1 -->
-    <div class="art">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1">
-      <a class="price" href="https://streamlabs.com/skrumrl/tip" target="_blank">$4</a>
-    </div>
-
-    <!-- Art 2 -->
-    <div class="art">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled19_20250524212918%20(2).png?raw=true" alt="Art 2">
-      <a class="price" href="https://streamlabs.com/skrumrl/tip" target="_blank">$8</a>
-    </div>
-
-    <!-- Art 3 -->
-    <div class="art">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled12_20250524014829.png?raw=true" alt="Art 3">
-      <a class="price" href="https://streamlabs.com/skrumrl/tip" target="_blank">$6</a>
-    </div>
+  <div class="art-piece">
+    <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
+    <p class="price">Price: $4</p>
+    <a href="https://streamlabs.com/skrumrl/tip" target="_blank" class="pay-button">Pay $4 Now</a>
   </div>
+
+  <div class="art-piece">
+    <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 2" />
+    <p class="price">Price: $8</p>
+    <a href="https://streamlabs.com/skrumrl/tip" target="_blank" class="pay-button">Pay $8 Now</a>
+  </div>
+
+  <div class="art-piece">
+    <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 3" />
+    <p class="price">Price: $6</p>
+    <a href="https://streamlabs.com/skrumrl/tip" target="_blank" class="pay-button">Pay $6 Now</a>
+  </div>
+
 </body>
 </html>
-
 
   <footer>
     &copy; 2025 by Lily1Art | All art is original 💕
