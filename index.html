@@ -17,7 +17,7 @@
       min-height: 100vh;
       margin: 0;
     }
-    /* subtle overlay so text stays readable */
+
     body::before {
       content: "";
       position: fixed;
@@ -25,93 +25,75 @@
       background: rgba(255, 230, 240, 0.6);
       z-index: -1;
     }
-    .art-piece {
-      margin-bottom: 40px;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 15px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(214, 125, 160, 0.4);
-      display: inline-block;
-      max-width: 400px;
-      width: 90%;
-    }
-    .art-piece img {
-      width: 100%;
-      max-width: 380px;
-      height: 280px;
-      object-fit: contain;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(214, 125, 160, 0.4);
-      background: white;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-    .price {
-      font-size: 1.2rem;
-      color: #d67da0;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-    .pay-button {
-      display: inline-block;
-      background-color: #ff94c2;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 10px;
-      transition: background-color 0.3s ease;
-    }
-    .pay-button:hover {
-      background-color: #e06ba8;
-    }
+
     h1 {
       color: #d67da0;
       margin-bottom: 40px;
       text-shadow: 1px 1px 3px #fff;
     }
+
+    form {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 450px;
+      margin: 0 auto;
+      box-shadow: 0 4px 12px rgba(214, 125, 160, 0.4);
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #ff94c2;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .submit-btn {
+      background-color: #ff94c2;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-top: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #e06ba8;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: #d67da0;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <h1>Welcome to My Art Gallery 💖</h1>
+  <h1>Confirm Your Payment 💖</h1>
 
-  <div class="art-piece">
-    <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
-    <p class="price">Price: $4</p>
-    <a href="https://streamlabs.com/skrumrl/tip" target="_blank" class="pay-button">Pay $4 Now</a>
-  </div>
-   <div class="art-piece">
-    <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2" />
-    <p class="price">Price: $10</p>
-    <a href="https://streamlabs.com/skrumrl/tip" target="_blank" class="pay-button">Pay $10 Now</a>
-  </div>
-   <div class="art-piece">
-    <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3" />
-    <p class="price">Price: $8</p>
-    <a href="https://streamlabs.com/skrumrl/tip" target="_blank" class="pay-button">Pay $8 Now</a>
-  </div>
+  <form action="https://formspree.io/f/mzzrloeo" method="POST" onsubmit="redirectToPayment()">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <input type="text" name="instagram" placeholder="Instagram Username" required />
+    <input type="number" name="amount" placeholder="Amount to Pay ($)" required />
+    <button type="submit" class="submit-btn">Continue</button>
+  </form>
 
+  <footer>&copy; 2025 by Lily1Art | All art is original 💕</footer>
 
-  <div class="art-piece">
-    <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 4" />
-    <p class="price">Price: $8</p>
-    <a href="https://streamlabs.com/skrumrl/tip" target="_blank" class="pay-button">Pay $8 Now</a>
-  </div>
-
-  <div class="art-piece">
-    <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 5" />
-    <p class="price">Price: $6</p>
-    <a href="https://streamlabs.com/skrumrl/tip" target="_blank" class="pay-button">Pay $6 Now</a>
-  </div>
- 
- 
-</body>
-</html>
-
-  <footer>
-    &copy; 2025 by Lily1Art | All art is original 💕
-  </footer>
-
+  <script>
+    function redirectToPayment() {
+      setTimeout(function () {
+        window.location.href = "https://streamlabs.com/skrumrl/tip";
+      }, 1000); // slight delay so form can submit
+    }
+  </script>
 </body>
 </html>
