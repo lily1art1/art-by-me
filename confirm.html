@@ -1,0 +1,87 @@
+<!-- confirm.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Confirm Payment</title>
+  <style>
+    body {
+      background: #fff0f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      padding: 20px;
+      text-align: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    form {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 450px;
+      margin: 0 auto;
+      box-shadow: 0 4px 12px rgba(214, 125, 160, 0.4);
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #ff94c2;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .submit-btn {
+      background-color: #ff94c2;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-top: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .submit-btn:hover {
+      background-color: #e06ba8;
+    }
+  </style>
+</head>
+<body>
+  <h2>Almost There! 💖</h2>
+  <p>Just fill in your details before we send you to the payment page!</p>
+
+  <form id="paymentForm">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <input type="text" name="instagram" placeholder="Instagram Username" required />
+    <input type="number" name="amount" id="amountInput" placeholder="Amount to Pay ($)" required />
+    <button type="submit" class="submit-btn">Continue</button>
+  </form>
+
+  <script>
+    // Autofill amount from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const price = urlParams.get('price');
+    if (price) {
+      document.getElementById('amountInput').value = price;
+    }
+
+    document.getElementById('paymentForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      fetch("https://formspree.io/f/YOUR_FORM_ID_HERE", {
+        method: "POST",
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      }).finally(() => {
+        window.location.href = "https://streamlabs.com/skrumrl/tip";
+      });
+    });
+  </script>
+</body>
+</html>
