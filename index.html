@@ -88,12 +88,25 @@
 
   <footer>&copy; 2025 by Lily1Art | All art is original 💕</footer>
 
-  <script>
-    function redirectToPayment() {
-      setTimeout(function () {
+ <script>
+    document.getElementById('paymentForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      fetch("https://formspree.io/f/YOUR_FORM_ID_HERE", {
+        method: "POST",
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      }).then(response => {
+        // redirect no matter what happens
         window.location.href = "https://streamlabs.com/skrumrl/tip";
-      }, 1000); // slight delay so form can submit
-    }
+      }).catch(error => {
+        // still redirect, but maybe alert user too
+        window.location.href = "https://streamlabs.com/skrumrl/tip";
+      });
+    });
   </script>
 </body>
 </html>
