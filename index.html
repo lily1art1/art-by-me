@@ -36,30 +36,10 @@
       background: none;
       border: none;
       cursor: pointer;
-      position: relative;
     }
     .icon-btn img {
       width: 24px;
       height: 24px;
-    }
-    /* Cart count badge style */
-    #cartCount {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background: #d67da0;
-      color: white;
-      font-size: 12px;
-      font-weight: bold;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      user-select: none;
-      display: flex;
     }
     .gallery {
       display: grid;
@@ -91,17 +71,14 @@
       height: auto;
       border-radius: 10px;
     }
-    /* Updated price style with rectangle and black color */
     .price {
       color: black;
-      font-weight: 700;
+      font-weight: 600;
       margin: 10px 0 5px 0;
+      padding: 5px 10px;
       border: 2px solid black;
+      border-radius: 10px;
       display: inline-block;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 1rem;
-      user-select: none;
     }
     .add-to-cart {
       background-color: #fbb6ce;
@@ -141,43 +118,20 @@
 
     /* Cart slide-in panel styles */
     .cart-popup {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 350px;
-  height: 80vh; /* limit height so it’s not too tall */
-  background: white;
-  border-left: 3px solid #ff94c2;
-  box-shadow: -3px 0 15px rgba(255, 148, 194, 0.5);
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-  z-index: 1100;
-  transition: right 0.4s ease;
-}
-
-.cart-popup.active {
-  right: 0;
-}
-
-/* Make the cart items container scrollable with max height */
-.cart-items {
-  flex-grow: 1;
-  overflow-y: auto;
-  margin-top: 10px;
-  max-height: calc(80vh - 140px); /* roughly space for header + footer */
-}
-
-/* footer stays visible */
-.cart-footer {
-  border-top: 2px solid #ff94c2;
-  padding-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-shrink: 0; /* prevent shrinking */
-}
-
+      position: fixed;
+      top: 0;
+      right: -400px; /* hidden */
+      width: 350px;
+      height: 80vh; /* limit height */
+      background: white;
+      border-left: 3px solid #ff94c2;
+      box-shadow: -3px 0 15px rgba(255, 148, 194, 0.5);
+      transition: right 0.4s ease;
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+    }
     .cart-popup.active {
       right: 0;
     }
@@ -203,6 +157,7 @@
       flex-grow: 1;
       overflow-y: auto;
       margin-top: 10px;
+      max-height: calc(80vh - 140px);
     }
     .cart-item {
       display: flex;
@@ -262,6 +217,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-shrink: 0;
     }
     .total-price {
       font-weight: 700;
@@ -281,15 +237,38 @@
     .pay-btn:hover {
       background-color: #e06ba8;
     }
+
+    /* Cart icon badge */
+    #cartCount {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #e06ba8;
+      color: white;
+      font-weight: bold;
+      font-size: 0.75rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .icon-btn {
+      position: relative;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1> lily art gallery 💖</h1>
+    <h1>welcome to my art gallery 💖</h1>
     <div class="icons">
       <button class="icon-btn" onclick="toggleCart()">
-        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" />
-        <span id="cartCount">0</span>
+        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart">
+        <div id="cartCount"></div>
       </button>
       <button class="icon-btn" onclick="toggleContact()">
         <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Contact">
@@ -311,51 +290,28 @@
       <h3>Your Cart</h3>
       <button class="close-cart" onclick="toggleCart()">×</button>
     </div>
-    <div id="cartItems" class="cart-items">
-      <p>Your cart is empty 💼</p>
-    </div>
+    <div class="cart-items" id="cartItems"></div>
     <div class="cart-footer">
-      <div class="total-price">Total: $0</div>
-      <button onclick="goToConfirmation()" class="pay-btn">Pay</button>
+      <div class="total-price" id="totalPrice">$0.00</div>
+      <button class="pay-btn" onclick="alert('Payment functionality coming soon!')">Pay</button>
     </div>
   </div>
 
-
-  <div class="gallery" id="gallery">
+  <div class="gallery">
     <div class="art-card">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
+      <img src="https://i.ibb.co/ZhH9h5K/art1.jpg" alt="Art 1" />
       <div class="price">Art 1 - $4</div>
-      <button class="add-to-cart" onclick="addToCart('Art 1', 4)">Add to Cart</button>
+      <button class="add-to-cart" onclick="addToCart('Art 1', 4, 'https://i.ibb.co/ZhH9h5K/art1.jpg')">Add to Cart</button>
     </div>
     <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2" />
-      <div class="price">Art 2 -$10</div>
-      <button class="add-to-cart" onclick="addToCart('Art 2', 10)">Add to Cart</button>
+      <img src="https://i.ibb.co/SNf0kYV/art2.jpg" alt="Art 2" />
+      <div class="price">Art 2 - $8</div>
+      <button class="add-to-cart" onclick="addToCart('Art 2', 8, 'https://i.ibb.co/SNf0kYV/art2.jpg')">Add to Cart</button>
     </div>
     <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3" />
-      <div class="price">Art 3 -$8</div>
-      <button class="add-to-cart" onclick="addToCart('Art 3', 8)">Add to Cart</button>
-    </div>
-    <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled31_20250526145417.png?raw=true" alt="Art 4" />
-      <div class="price">Art 4 -$9</div>
-      <button class="add-to-cart" onclick="addToCart('Art 4', 9)">Add to Cart</button>
-    </div>
-    <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 5" />
-      <div class="price">Art 5 -$12</div>
-      <button class="add-to-cart" onclick="addToCart('Art 5', 12)">Add to Cart</button>
-    </div>
-    <div class="art-card">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 6" />
-      <div class="price">Art 6 -$8</div>
-      <button class="add-to-cart" onclick="addToCart('Art 6', 8)">Add to Cart</button>
-    </div>
-    <div class="art-card">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7" />
-      <div class="price">Art 7 -$6</div>
-      <button class="add-to-cart" onclick="addToCart('Art 7', 6)">Add to Cart</button>
+      <img src="https://i.ibb.co/2Fh9q4c/art3.jpg" alt="Art 3" />
+      <div class="price">Art 3 - $12</div>
+      <button class="add-to-cart" onclick="addToCart('Art 3', 12, 'https://i.ibb.co/2Fh9q4c/art3.jpg')">Add to Cart</button>
     </div>
   </div>
 
@@ -363,7 +319,19 @@
     const cartPopup = document.getElementById('cartPopup');
     const contactPopup = document.getElementById('contactPopup');
     const cartItemsContainer = document.getElementById('cartItems');
-    let cart = [];
+    const totalPriceEl = document.getElementById('totalPrice');
+    const cartCount = document.getElementById('cartCount');
+
+    let cart = {};
+
+    function toggleCart() {
+      if (cartPopup.classList.contains('active')) {
+        cartPopup.classList.remove('active');
+      } else {
+        cartPopup.classList.add('active');
+        contactPopup.style.display = 'none';
+      }
+    }
 
     function toggleContact() {
       if (contactPopup.style.display === 'block') {
@@ -374,100 +342,64 @@
       }
     }
 
-    function toggleCart() {
-      cartPopup.classList.toggle('active');
-      updateCartDisplay();
-      contactPopup.style.display = 'none';
-    }
-
-    function addToCart(item, price, imageUrl) {
-      const existingItem = cart.find(c => c.item === item);
-      if (existingItem) {
-        existingItem.qty++;
+    function addToCart(name, price, img) {
+      if (cart[name]) {
+        cart[name].quantity++;
       } else {
-        cart.push({ item, price, qty: 1, imageUrl });
+        cart[name] = { price, quantity: 1, img };
       }
-      updateCartDisplay();
-      updateCartCount();
-      // No auto-open of cartPopup here
+      updateCart();
+      cartPopup.classList.add('active');
     }
 
-    function updateCartDisplay() {
-      if (cart.length === 0) {
-        cartItemsContainer.innerHTML = "<p>Your cart is empty 💼</p>";
-        updateCartCount();
-        updateTotalPrice();
-        return;
-      }
-      let html = '';
-      cart.forEach((c, index) => {
-        html += `
-          <div class="cart-item">
-            <img src="${c.imageUrl}" alt="${c.item}" />
-            <div class="item-details">
-              <p class="item-name">${c.item}</p>
-              <p class="item-price">$${c.price} each</p>
-              <div class="quantity-controls">
-                <button onclick="decreaseQuantity(${index})">-</button>
-                <span>${c.qty}</span>
-                <button onclick="increaseQuantity(${index})">+</button>
-                <button class="remove-btn" onclick="removeFromCart(${index})" title="Remove">&times;</button>
-              </div>
+    function updateCart() {
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+      let totalCount = 0;
+      for (const [name, item] of Object.entries(cart)) {
+        total += item.price * item.quantity;
+        totalCount += item.quantity;
+
+        const itemEl = document.createElement('div');
+        itemEl.classList.add('cart-item');
+        itemEl.innerHTML = `
+          <img src="${item.img}" alt="${name}" />
+          <div class="item-details">
+            <p class="item-name">${name}</p>
+            <p class="item-price">$${item.price}</p>
+            <div class="quantity-controls">
+              <button onclick="changeQuantity('${name}', -1)">-</button>
+              <span>${item.quantity}</span>
+              <button onclick="changeQuantity('${name}', 1)">+</button>
+              <button class="remove-btn" onclick="removeItem('${name}')">&times;</button>
             </div>
           </div>
         `;
-      });
-      cartItemsContainer.innerHTML = html;
-      updateTotalPrice();
-      updateCartCount();
-    }
-
-    function updateCartCount() {
-      const cartCount = document.getElementById('cartCount');
-      const totalQty = cart.reduce((sum, c) => sum + c.qty, 0);
-      if (totalQty > 0) {
+        cartItemsContainer.appendChild(itemEl);
+      }
+      totalPriceEl.textContent = `$${total.toFixed(2)}`;
+      if (totalCount > 0) {
         cartCount.style.display = 'flex';
-        cartCount.textContent = totalQty;
+        cartCount.textContent = totalCount;
       } else {
         cartCount.style.display = 'none';
       }
     }
 
-    function increaseQuantity(index) {
-      cart[index].qty++;
-      updateCartDisplay();
-    }
-
-    function decreaseQuantity(index) {
-      if (cart[index].qty > 1) {
-        cart[index].qty--;
-      } else {
-        cart.splice(index, 1);
+    function changeQuantity(name, delta) {
+      if (!cart[name]) return;
+      cart[name].quantity += delta;
+      if (cart[name].quantity <= 0) {
+        delete cart[name];
       }
-      updateCartDisplay();
+      updateCart();
     }
 
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      updateCartDisplay();
+    function removeItem(name) {
+      delete cart[name];
+      updateCart();
     }
-
-    function updateTotalPrice() {
-      const total = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
-      const totalPriceElem = document.querySelector('.total-price');
-      totalPriceElem.textContent = `Total: $${total}`;
-    }
-
-    function goToConfirmation() {
-      if(cart.length === 0) {
-        alert("Your cart is empty, babe!");
-        return;
-      }
-      window.location.href = 'confirm.html';
-    }
-
-    // Initialize badge on page load
-    updateCartCount();
   </script>
 </body>
 </html>
+
