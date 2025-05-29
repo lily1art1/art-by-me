@@ -12,6 +12,7 @@
       color: #222;
       text-align: center;
       padding: 40px 20px;
+      position: relative;
     }
     .container {
       max-width: 1200px;
@@ -116,33 +117,72 @@
     .add-btn:hover {
       background: #bf006b;
     }
-    /* Cart summary panel */
-    .cart-summary {
+    /* Cart icon top-right */
+    .cart-icon {
       position: fixed;
       top: 20px;
       right: 20px;
+      background: #e6007e;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .cart-icon img {
+      width: 26px;
+      height: 26px;
+      filter: invert(100%);
+    }
+    .cart-badge {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #fff;
+      color: #e6007e;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 2px 6px;
+      border-radius: 12px;
+      border: 2px solid #e6007e;
+      min-width: 18px;
+      text-align: center;
+    }
+    /* Cart summary panel */
+    .cart-summary {
+      position: fixed;
+      top: 80px;
+      right: 20px;
       background: #fff;
       padding: 15px 20px;
-      border-radius: 30px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.15);
       font-weight: 600;
       color: #e6007e;
       z-index: 1000;
-      min-width: 180px;
+      min-width: 220px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
     }
-    .cart-summary span {
-      font-weight: 700;
-      font-size: 1.2rem;
+    .cart-summary.visible {
+      display: flex;
+    }
+    .cart-summary div {
+      font-size: 1rem;
     }
     .pay-now-btn {
-      margin-top: 10px;
       background: #e6007e;
       color: white;
       border: none;
       border-radius: 30px;
-      padding: 10px 20px;
+      padding: 10px 0;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 1.1rem;
       cursor: pointer;
       width: 100%;
       transition: background-color 0.3s ease;
@@ -163,11 +203,6 @@
       }
       .container {
         padding: 30px 20px 50px;
-      }
-      .cart-summary {
-        min-width: 140px;
-        font-size: 0.9rem;
-        padding: 10px 15px;
       }
     }
   </style>
@@ -233,12 +268,19 @@
         <button class="add-btn" onclick="addToCart('Art 7', 6)">Add to Panier</button>
       </div>
     </div>
+  </div>
 
-    <div class="cart-summary" id="cartSummary" style="display:none;">
-      <div>Items in Panier: <span id="cartCount">0</span></div>
-      <div>Total: $<span id="cartTotal">0</span></div>
-      <button class="pay-now-btn" onclick="goToConfirmation()">Pay Now</button>
-    </div>
+  <!-- Cart icon -->
+  <div class="cart-icon" id="cartIcon" title="View Panier">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Shopping_cart_font_awesome.svg" alt="Panier" />
+    <div class="cart-badge" id="cartBadge" style="display:none;">0</div>
+  </div>
+
+  <!-- Cart summary -->
+  <div class="cart-summary" id="cartSummary">
+    <div>Items in Panier: <span id="cartCount">0</span></div>
+    <div>Total: $<span id="cartTotal">0</span></div>
+    <button class="pay-now-btn" onclick="goToConfirmation()">Pay Now</button>
   </div>
 
   <script>
@@ -256,28 +298,34 @@
       document.getElementById('cartTotal').textContent = total.toFixed(2);
 
       const cartSummary = document.getElementById('cartSummary');
+      const cartBadge = document.getElementById('cartBadge');
+
       if (count > 0) {
-        cartSummary.style.display = 'block';
+        cartSummary.style.display = 'flex';
+        cartBadge.style.display = 'block';
+        cartBadge.textContent = count;
       } else {
         cartSummary.style.display = 'none';
+        cartBadge.style.display = 'none';
       }
     }
 
     function goToConfirmation() {
-      // Simple confirmation page with the cart summary.
-      let message = "You're buying:\n\n";
-      cart.forEach((item, i) => {
-        message += `${i + 1}. ${item.name} - $${item.price}\n`;
-      });
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
-      message += `\nTotal to pay: $${total.toFixed(2)}\n\nThank you, babe! 💖`;
-
-      alert(message);
-
-      // Reset cart after confirmation for this demo:
-      cart.length = 0;
-      updateCartSummary();
+      // Save cart in localStorage before going
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = 'confirmation.html';
     }
+
+    // Toggle cart summary visibility by clicking the cart icon
+    const cartIcon = document.getElementById('cartIcon');
+    const cartSummary = document.getElementById('cartSummary');
+    cartIcon.addEventListener('click', () => {
+      if (cartSummary.style.display === 'flex') {
+        cartSummary.style.display = 'none';
+      } else if (cart.length > 0) {
+        cartSummary.style.display = 'flex';
+      }
+    });
   </script>
 </body>
 </html>
