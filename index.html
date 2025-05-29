@@ -1,329 +1,170 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Art Gallery with Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art By Me</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      background: #f8f8f8;
-      color: #222;
-      text-align: center;
-      padding: 40px 20px;
-      position: relative;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff0f5;
+      color: #333;
     }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      padding: 40px 30px 60px;
-      position: relative;
-    }
-    h1 {
-      font-weight: 700;
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      letter-spacing: 1.5px;
-      color: #e6007e;
-    }
-    .instagram {
-      margin-bottom: 40px;
-      display: inline-flex;
+    header {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      font-weight: 600;
-      font-size: 1.2rem;
-      color: #e6007e;
+      padding: 10px 20px;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      color: #d67da0;
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .icon-link {
+      color: #d67da0;
+      font-size: 1.3rem;
       text-decoration: none;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.3s ease;
+      transition: color 0.3s;
     }
-    .instagram:hover {
-      border-color: #e6007e;
+    .icon-link:hover {
+      color: #ff94c2;
     }
-    .instagram img {
-      width: 20px;
-      height: 20px;
-      filter: invert(38%) sepia(67%) saturate(3312%) hue-rotate(310deg) brightness(97%) contrast(98%);
+    .contact-popup {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      padding: 15px;
+      display: none;
     }
-    .profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 25px;
-      box-shadow: 0 4px 15px rgba(230,0,126,0.3);
-      border: 3px solid #e6007e;
-      transition: transform 0.3s ease;
-    }
-    .profile-pic:hover {
-      transform: scale(1.05);
+    .contact-popup p {
+      margin: 10px 0;
+      font-size: 0.95rem;
     }
     .gallery {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      padding: 0 10px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
     }
-    .art-card {
-      background: #fff;
+    .art-piece {
+      background: white;
+      padding: 10px;
       border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      transition: box-shadow 0.3s ease;
-      cursor: default;
-      padding: 15px;
-    }
-    .art-card:hover {
-      box-shadow: 0 10px 25px rgba(230,0,126,0.3);
-    }
-    .art-card img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      transition: transform 0.4s ease;
-      display: block;
-      border-radius: 10px;
-      margin-bottom: 12px;
-    }
-    .art-card:hover img {
-      transform: scale(1.05);
-    }
-    .price {
-      font-weight: 700;
-      font-size: 1.2rem;
-      margin-bottom: 12px;
-      color: #e6007e;
-    }
-    .add-btn {
-      background: #e6007e;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      padding: 10px 20px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin-bottom: 10px;
-    }
-    .add-btn:hover {
-      background: #bf006b;
-    }
-    /* Cart icon top-right */
-    .cart-icon {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #e6007e;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      z-index: 1001;
-    }
-    .cart-icon img {
-      width: 26px;
-      height: 26px;
-      filter: invert(100%);
-    }
-    .cart-badge {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background: #fff;
-      color: #e6007e;
-      font-weight: 700;
-      font-size: 0.8rem;
-      padding: 2px 6px;
-      border-radius: 12px;
-      border: 2px solid #e6007e;
-      min-width: 18px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       text-align: center;
+      animation: fadeIn 1s ease-in;
     }
-    /* Cart summary panel */
-    .cart-summary {
-      position: fixed;
-      top: 80px;
-      right: 20px;
-      background: #fff;
-      padding: 15px 20px;
-      border-radius: 20px;
-      box-shadow: 0 4px 25px rgba(0,0,0,0.15);
-      font-weight: 600;
-      color: #e6007e;
-      z-index: 1000;
-      min-width: 220px;
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .cart-summary.visible {
-      display: flex;
-    }
-    .cart-summary div {
-      font-size: 1rem;
-    }
-    .pay-now-btn {
-      background: #e6007e;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      padding: 10px 0;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
+    .art-piece img {
       width: 100%;
+      border-radius: 10px;
+      height: auto;
+    }
+    .pay-button {
+      margin-top: 10px;
+      display: inline-block;
+      background-color: #ff94c2;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      text-decoration: none;
       transition: background-color 0.3s ease;
     }
-    .pay-now-btn:hover {
-      background: #bf006b;
+    .pay-button:hover {
+      background-color: #e06ba8;
     }
-    /* Responsive */
-    @media (max-width: 900px) {
-      .gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    @media (max-width: 480px) {
-      .gallery {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-      }
-      .container {
-        padding: 30px 20px 50px;
-      }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>My Art Gallery</h1>
+  <header>
+    <h1>My Art Gallery 💖</h1>
+    <div class="icons">
+      <a href="#" class="icon-link" id="contactToggle"><i class="fas fa-envelope"></i></a>
+      <a href="cart.html" class="icon-link"><i class="fas fa-shopping-cart"></i></a>
+    </div>
+    <div class="contact-popup" id="contactPopup">
+      <p><i class="fas fa-envelope"></i> lily1art1@example.com</p>
+      <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/lily1_art1/" target="_blank">@lily1_art1</a></p>
+    </div>
+  </header>
 
-    <img
-      src="https://github.com/lily1art1/art-by-me/blob/main/7e3fdcd5f095f369a536afec8dd22e95.jpg?raw=true"
-      alt="Profile Picture"
-      class="profile-pic"
-    />
-
-    <a href="https://www.instagram.com/lily1_art1/" target="_blank" class="instagram" rel="noopener noreferrer">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
-        alt="Instagram Logo"
-      />
-      @lily1_art1
-    </a>
-
-    <div class="gallery" id="gallery">
-      <div class="art-card" data-price="4" data-name="Art 1">
-        <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
-        <div class="price">$4</div>
-        <button class="add-btn" onclick="addToCart('Art 1', 4)">Add to Panier</button>
-      </div>
-
-      <div class="art-card" data-price="10" data-name="Art 2">
-        <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2" />
-        <div class="price">$10</div>
-        <button class="add-btn" onclick="addToCart('Art 2', 10)">Add to Panier</button>
-      </div>
-
-      <div class="art-card" data-price="8" data-name="Art 3">
-        <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3" />
-        <div class="price">$8</div>
-        <button class="add-btn" onclick="addToCart('Art 3', 8)">Add to Panier</button>
-      </div>
-
-      <div class="art-card" data-price="9" data-name="Art 4">
-        <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled31_20250526145417.png?raw=true" alt="Art 4" />
-        <div class="price">$9</div>
-        <button class="add-btn" onclick="addToCart('Art 4', 9)">Add to Panier</button>
-      </div>
-
-      <div class="art-card" data-price="12" data-name="Art 5">
-        <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 5" />
-        <div class="price">$12</div>
-        <button class="add-btn" onclick="addToCart('Art 5', 12)">Add to Panier</button>
-      </div>
-
-      <div class="art-card" data-price="8" data-name="Art 6">
-        <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 6" />
-        <div class="price">$8</div>
-        <button class="add-btn" onclick="addToCart('Art 6', 8)">Add to Panier</button>
-      </div>
-
-      <div class="art-card" data-price="6" data-name="Art 7">
-        <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7" />
-        <div class="price">$6</div>
-        <button class="add-btn" onclick="addToCart('Art 7', 6)">Add to Panier</button>
-      </div>
+  <div class="gallery">
+    <div class="art-piece">
+      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1">
+      <a href="confirm.html?price=4" class="pay-button">Pay $4</a>
+    </div>
+    <div class="art-piece">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2">
+      <a href="confirm.html?price=10" class="pay-button">Pay $10</a>
+    </div>
+    <div class="art-piece">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3">
+      <a href="confirm.html?price=8" class="pay-button">Pay $8</a>
+    </div>
+    <div class="art-piece">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled31_20250526145417.png?raw=true" alt="Art 4">
+      <a href="confirm.html?price=9" class="pay-button">Pay $9</a>
+    </div>
+    <div class="art-piece">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 5">
+      <a href="confirm.html?price=12" class="pay-button">Pay $12</a>
+    </div>
+    <div class="art-piece">
+      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 6">
+      <a href="confirm.html?price=8" class="pay-button">Pay $8</a>
+    </div>
+    <div class="art-piece">
+      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7">
+      <a href="confirm.html?price=6" class="pay-button">Pay $6</a>
     </div>
   </div>
 
-  <!-- Cart icon -->
-  <div class="cart-icon" id="cartIcon" title="View Panier">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Shopping_cart_font_awesome.svg" alt="Panier" />
-    <div class="cart-badge" id="cartBadge" style="display:none;">0</div>
-  </div>
-
-  <!-- Cart summary -->
-  <div class="cart-summary" id="cartSummary">
-    <div>Items in Panier: <span id="cartCount">0</span></div>
-    <div>Total: $<span id="cartTotal">0</span></div>
-    <button class="pay-now-btn" onclick="goToConfirmation()">Pay Now</button>
-  </div>
+  <footer>
+    &copy; 2025 by Lily1Art | All art is original 💕
+  </footer>
 
   <script>
-    const cart = [];
+    const contactToggle = document.getElementById('contactToggle');
+    const contactPopup = document.getElementById('contactPopup');
 
-    function addToCart(name, price) {
-      cart.push({ name, price });
-      updateCartSummary();
-    }
+    contactToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      contactPopup.style.display = contactPopup.style.display === 'block' ? 'none' : 'block';
+    });
 
-    function updateCartSummary() {
-      const count = cart.length;
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
-      document.getElementById('cartCount').textContent = count;
-      document.getElementById('cartTotal').textContent = total.toFixed(2);
-
-      const cartSummary = document.getElementById('cartSummary');
-      const cartBadge = document.getElementById('cartBadge');
-
-      if (count > 0) {
-        cartSummary.style.display = 'flex';
-        cartBadge.style.display = 'block';
-        cartBadge.textContent = count;
-      } else {
-        cartSummary.style.display = 'none';
-        cartBadge.style.display = 'none';
-      }
-    }
-
-    function goToConfirmation() {
-      // Save cart in localStorage before going
-      localStorage.setItem('cart', JSON.stringify(cart));
-      window.location.href = 'confirm.html';
-    }
-
-    // Toggle cart summary visibility by clicking the cart icon
-    const cartIcon = document.getElementById('cartIcon');
-    const cartSummary = document.getElementById('cartSummary');
-    cartIcon.addEventListener('click', () => {
-      if (cartSummary.style.display === 'flex') {
-        cartSummary.style.display = 'none';
-      } else if (cart.length > 0) {
-        cartSummary.style.display = 'flex';
+    window.addEventListener('click', (e) => {
+      if (!contactPopup.contains(e.target) && e.target !== contactToggle) {
+        contactPopup.style.display = 'none';
       }
     });
   </script>
