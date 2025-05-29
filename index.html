@@ -47,7 +47,7 @@
       gap: 20px;
       padding: 20px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
       .gallery {
         grid-template-columns: 1fr;
       }
@@ -59,6 +59,9 @@
       padding: 10px;
       text-align: center;
       transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .art-card:hover {
       transform: scale(1.03);
@@ -70,11 +73,10 @@
     }
     .price {
       color: #d67da0;
-      font-weight: bold;
-      margin-top: 10px;
+      font-weight: 600;
+      margin: 10px 0 5px 0;
     }
     .add-to-cart {
-      margin-top: 8px;
       background-color: #fbb6ce;
       color: white;
       padding: 10px 20px;
@@ -109,72 +111,72 @@
       width: 18px;
       margin-right: 6px;
     }
-    /* CART SIDE PANEL */
+
+    /* Cart slide-in panel styles */
     .cart-popup {
       position: fixed;
       top: 0;
-      right: -400px; /* hidden by default */
-      width: 360px;
-      height: 100%;
+      right: -400px; /* hidden */
+      width: 350px;
+      height: 100vh;
       background: white;
-      box-shadow: -4px 0 15px rgba(214, 125, 160, 0.3);
-      border-left: 2px solid #ff94c2;
-      padding: 20px;
-      box-sizing: border-box;
-      z-index: 1100;
+      border-left: 3px solid #ff94c2;
+      box-shadow: -3px 0 15px rgba(255, 148, 194, 0.5);
       transition: right 0.4s ease;
+      z-index: 1100;
       display: flex;
       flex-direction: column;
+      padding: 15px;
     }
     .cart-popup.active {
       right: 0;
     }
     .cart-header {
-      font-weight: bold;
-      font-size: 1.3rem;
-      color: #d67da0;
-      margin-bottom: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 2px solid #ff94c2;
+      padding-bottom: 10px;
     }
-    .close-cart-btn {
+    .cart-header h3 {
+      color: #d67da0;
+      margin: 0;
+    }
+    .close-cart {
       background: none;
       border: none;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       cursor: pointer;
       color: #d67da0;
     }
     .cart-items {
       flex-grow: 1;
       overflow-y: auto;
+      margin-top: 10px;
     }
     .cart-item {
       display: flex;
       align-items: center;
       margin-bottom: 15px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 10px;
     }
     .cart-item img {
       width: 60px;
       height: 60px;
       object-fit: cover;
-      border-radius: 8px;
-      margin-right: 15px;
+      border-radius: 10px;
+      margin-right: 10px;
     }
-    .cart-item-details {
+    .item-details {
       flex-grow: 1;
     }
-    .cart-item-name {
+    .item-name {
       font-weight: 600;
-      margin: 0 0 5px;
-      color: #444;
+      margin: 0;
+      color: #333;
     }
-    .cart-item-price {
+    .item-price {
       color: #d67da0;
-      font-weight: bold;
-      margin-bottom: 6px;
+      margin: 5px 0;
     }
     .quantity-controls {
       display: flex;
@@ -182,61 +184,52 @@
       gap: 8px;
     }
     .quantity-controls button {
-      border: 1px solid #d67da0;
-      background: none;
-      color: #d67da0;
-      font-weight: bold;
-      border-radius: 5px;
+      background: #fbb6ce;
+      border: none;
+      border-radius: 50%;
       width: 26px;
       height: 26px;
       cursor: pointer;
-      user-select: none;
-    }
-    .quantity-controls span {
-      min-width: 20px;
-      text-align: center;
-      font-weight: 600;
-    }
-    .remove-item-btn {
-      background: none;
-      border: none;
-      color: #ff94c2;
-      cursor: pointer;
-      font-size: 1.2rem;
-      margin-left: 10px;
-      transition: color 0.2s ease;
-    }
-    .remove-item-btn:hover {
-      color: #d1407f;
-    }
-    .cart-total {
+      color: white;
       font-weight: bold;
       font-size: 1.2rem;
+      line-height: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .remove-btn {
+      background: none;
+      border: none;
       color: #d67da0;
-      margin-top: 15px;
-      text-align: right;
+      font-size: 1.4rem;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    .cart-footer {
+      border-top: 2px solid #ff94c2;
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .total-price {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #d67da0;
     }
     .pay-btn {
       background-color: #fbb6ce;
-      color: white;
-      padding: 12px;
       border: none;
       border-radius: 25px;
+      padding: 10px 25px;
+      color: white;
       font-weight: bold;
-      font-size: 1.1rem;
-      margin-top: 15px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      width: 100%;
     }
     .pay-btn:hover {
       background-color: #e06ba8;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: white;
-      color: #888;
     }
   </style>
 </head>
@@ -258,32 +251,127 @@
       <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email"> lily1.art1@gmail.com
     </div>
     <div class="popup-item">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"> @<a href="https://www.instagram.com/lily1_art1/" target="_blank">lily1_art1</a>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"> @<a href="https://www.instagram.com/lily1_art1/" target="_blank" rel="noopener noreferrer">lily1_art1</a>
     </div>
   </div>
 
-  <div class="cart-popup" id="cartPopup">
+  <div id="cartPopup" class="cart-popup">
     <div class="cart-header">
-      Your Cart
-      <button class="close-cart-btn" onclick="toggleCart()">×</button>
+      <h3>Your Cart</h3>
+      <button class="close-cart" onclick="toggleCart()">×</button>
     </div>
-    <div class="cart-items" id="cartItems">
-      <p style="color:#888; text-align:center; margin-top: 50px;">Your cart is empty 💼</p>
+    <div id="cartItems" class="cart-items">
+      <p>Your cart is empty 💼</p>
     </div>
-    <div class="cart-total" id="cartTotal">Total: $0</div>
-    <button class="pay-btn" onclick="goToConfirmation()">Pay</button>
+    <div class="cart-footer">
+      <div class="total-price">Total: $0</div>
+      <button onclick="goToConfirmation()" class="pay-btn">Pay</button>
+    </div>
   </div>
 
   <div class="gallery" id="gallery">
     <div class="art-card">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1">
+      <img src="https://cdn.discordapp.com/attachments/1069912930792783972/1135082970335830600/Picsart_23-07-17_15-15-50-932.png" alt="Art 1" />
       <div class="price">$4</div>
-      <button class="add-to-cart" onclick="addToCart('Art 1', 4, 'https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png')">Add to Cart</button>
+      <button class="add-to-cart" onclick="addToCart('Art 1', 4, 'https://cdn.discordapp.com/attachments/1069912930792783972/1135082970335830600/Picsart_23-07-17_15-15-50-932.png')">Add to Cart</button>
     </div>
     <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2">
-      <div class="price">$10</div>
-      <button class="add-to-cart" onclick="addToCart('Art 2', 10, 'https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true')">Add to Cart</button>
+      <img src="https://cdn.discordapp.com/attachments/1069912930792783972/1135083452921654609/Picsart_23-07-17_15-44-36-966.png" alt="Art 2" />
+      <div class="price">$3</div>
+      <button class="add-to-cart" onclick="addToCart('Art 2', 3, 'https://cdn.discordapp.com/attachments/1069912930792783972/1135083452921654609/Picsart_23-07-17_15-44-36-966.png')">Add to Cart</button>
     </div>
     <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt
+      <img src="https://cdn.discordapp.com/attachments/1069912930792783972/1135083471891389994/Picsart_23-07-17_15-45-39-297.png" alt="Art 3" />
+      <div class="price">$2</div>
+      <button class="add-to-cart" onclick="addToCart('Art 3', 2, 'https://cdn.discordapp.com/attachments/1069912930792783972/1135083471891389994/Picsart_23-07-17_15-45-39-297.png')">Add to Cart</button>
+    </div>
+  </div>
+
+  <script>
+    const contactPopup = document.getElementById('contactPopup');
+    const cartPopup = document.getElementById('cartPopup');
+    const cartItemsContainer = document.getElementById('cartItems');
+    let cart = [];
+
+    function toggleContact() {
+      if (contactPopup.style.display === 'block') {
+        contactPopup.style.display = 'none';
+      } else {
+        contactPopup.style.display = 'block';
+        cartPopup.classList.remove('active');
+      }
+    }
+
+    function toggleCart() {
+      cartPopup.classList.toggle('active');
+      updateCartDisplay();
+      contactPopup.style.display = 'none';
+    }
+
+    function addToCart(item, price, imageUrl) {
+      const existingItem = cart.find(c => c.item === item);
+      if (existingItem) {
+        existingItem.qty++;
+      } else {
+        cart.push({ item, price, qty: 1, imageUrl });
+      }
+      updateCartDisplay();
+      if (!cartPopup.classList.contains('active')) {
+        cartPopup.classList.add('active');
+        contactPopup.style.display = 'none';
+      }
+    }
+
+    function updateCartDisplay() {
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p>Your cart is empty 💼</p>';
+      } else {
+        cartItemsContainer.innerHTML = cart.map((c, index) => `
+          <div class="cart-item">
+            <img src="${c.imageUrl}" alt="${c.item}" />
+            <div class="item-details">
+              <p class="item-name">${c.item}</p>
+              <p class="item-price">$${c.price}</p>
+              <div class="quantity-controls">
+                <button onclick="changeQuantity(${index}, -1)">−</button>
+                <span>${c.qty}</span>
+                <button onclick="changeQuantity(${index}, 1)">+</button>
+                <button class="remove-btn" onclick="removeFromCart(${index})">×</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+      updateTotal();
+    }
+
+    function changeQuantity(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartDisplay();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartDisplay();
+    }
+
+    function updateTotal() {
+      const total = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+      document.querySelector('.total-price').textContent = `Total: $${total}`;
+    }
+
+    function goToConfirmation() {
+      if (cart.length === 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+      const total = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+      window.location.href = `confirm.html?price=${total}`;
+    }
+  </script>
+</body>
+</html>
+
