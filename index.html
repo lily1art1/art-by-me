@@ -7,29 +7,18 @@
   <link rel="icon" type="image/png" href="favicon.png.png">
   <style>
     body {
-      background-image: url('https://i.pinimg.com/736x/0e/a3/61/0ea3610815d34274c68a3663f4047046.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      background-color: #fff0f5;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
       margin: 0;
       padding: 0;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(255, 230, 240, 0.6);
-      z-index: -1;
     }
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 20px;
-      background: white;
-      box-shadow: 0 4px 10px rgba(214, 125, 160, 0.2);
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -37,10 +26,10 @@
     header h1 {
       color: #d67da0;
       margin: 0;
+      font-size: 1.5rem;
     }
-    .header-icons {
+    .icons {
       display: flex;
-      align-items: center;
       gap: 15px;
     }
     .icon-btn {
@@ -49,31 +38,8 @@
       cursor: pointer;
     }
     .icon-btn img {
-      width: 28px;
-      height: 28px;
-    }
-    .contact-popup {
-      display: none;
-      position: absolute;
-      right: 20px;
-      top: 70px;
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      font-size: 0.95rem;
-    }
-    .contact-popup a {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: #d67da0;
-      margin-bottom: 8px;
-    }
-    .contact-popup a img {
-      width: 18px;
-      height: 18px;
-      margin-right: 8px;
+      width: 24px;
+      height: 24px;
     }
     .gallery {
       display: grid;
@@ -81,102 +47,165 @@
       gap: 20px;
       padding: 20px;
     }
-    .art-piece {
+    .art-card {
       background: white;
       border-radius: 15px;
       box-shadow: 0 4px 12px rgba(214, 125, 160, 0.4);
-      padding: 15px;
-      text-align: center;
-      animation: fadeIn 1s ease;
-    }
-    .art-piece img {
-      width: 100%;
-      height: 280px;
-      object-fit: contain;
-      border-radius: 10px;
-      background: white;
       padding: 10px;
-      box-shadow: 0 4px 8px rgba(214, 125, 160, 0.4);
+      text-align: center;
+      transition: transform 0.3s ease;
     }
-    .pay-button {
-      display: inline-block;
+    .art-card:hover {
+      transform: scale(1.03);
+    }
+    .art-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    .add-to-cart {
+      margin-top: 10px;
       background-color: #ff94c2;
       color: white;
       padding: 10px 20px;
+      border: none;
       border-radius: 25px;
-      text-decoration: none;
       font-weight: bold;
-      margin-top: 10px;
-      transition: background-color 0.3s ease;
+      cursor: pointer;
     }
-    .pay-button:hover {
-      background-color: #e06ba8;
+    .contact-popup, .cart-popup {
+      display: none;
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      background: white;
+      border: 2px solid #ff94c2;
+      border-radius: 10px;
+      padding: 15px;
+      width: 250px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      z-index: 1001;
+    }
+    .popup-item {
+      margin: 10px 0;
+      font-size: 0.95rem;
+    }
+    .popup-item img {
+      vertical-align: middle;
+      width: 18px;
+      margin-right: 6px;
     }
     footer {
       text-align: center;
       padding: 20px;
-      font-size: 0.9rem;
-      color: #777;
-      background: white;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (min-width: 768px) {
-      .gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (min-width: 1024px) {
-      .gallery {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      background-color: white;
+      color: #888;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>My Art Gallery</h1>
-    <div class="header-icons">
+    <h1>Art By Me 💖</h1>
+    <div class="icons">
+      <button class="icon-btn" onclick="toggleCart()">
+        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart">
+      </button>
       <button class="icon-btn" onclick="toggleContact()">
         <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Contact">
       </button>
-      <button class="icon-btn" onclick="openCart()">
-        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart">
-      </button>
-    </div>
-    <div id="contactPopup" class="contact-popup">
-      <a href="mailto:wiamklilch3@gmail.com" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"> wiamklilch3@gmail.com
-      </a>
-      <a href="https://www.instagram.com/lily1_art1/" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"> @lily1_art1
-      </a>
     </div>
   </header>
 
-  <main class="gallery">
-    <div class="art-piece">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
-      <a href="confirm.html?price=4" class="pay-button">Pay $4 Now</a>
+  <div class="contact-popup" id="contactPopup">
+    <div class="popup-item">
+      <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email"> lily1.art1@gmail.com
     </div>
-    <!-- Repeat more art pieces as needed -->
-  </main>
+    <div class="popup-item">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"> @<a href="https://www.instagram.com/lily1_art1/" target="_blank">lily1_art1</a>
+    </div>
+  </div>
 
-  <footer>
-    &copy; 2025 by Lily1Art | All art is original 💕
-  </footer>
+  <div class="cart-popup" id="cartPopup">
+    <div id="cartItems">Your cart is empty 💼</div>
+    <button onclick="goToConfirmation()" class="add-to-cart" style="margin-top: 10px;">Pay</button>
+  </div>
+
+  <div class="gallery" id="gallery">
+    <div class="art-card">
+      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1">
+      <button class="add-to-cart" onclick="addToCart('Art 1', 4)">Add to Cart - $4</button>
+    </div>
+    <div class="art-card">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2">
+      <button class="add-to-cart" onclick="addToCart('Art 2', 10)">Add to Cart - $10</button>
+    </div>
+    <div class="art-card">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3">
+      <button class="add-to-cart" onclick="addToCart('Art 3', 8)">Add to Cart - $8</button>
+    </div>
+    <div class="art-card">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled31_20250526145417.png?raw=true" alt="Art 4">
+      <button class="add-to-cart" onclick="addToCart('Art 4', 9)">Add to Cart - $9</button>
+    </div>
+    <div class="art-card">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 5">
+      <button class="add-to-cart" onclick="addToCart('Art 5', 12)">Add to Cart - $12</button>
+    </div>
+    <div class="art-card">
+      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 6">
+      <button class="add-to-cart" onclick="addToCart('Art 6', 8)">Add to Cart - $8</button>
+    </div>
+    <div class="art-card">
+      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7">
+      <button class="add-to-cart" onclick="addToCart('Art 7', 6)">Add to Cart - $6</button>
+    </div>
+  </div>
+
+  <footer>&copy; 2025 by Lily1Art | All art is original 💕</footer>
 
   <script>
+    const contactPopup = document.getElementById('contactPopup');
+    const cartPopup = document.getElementById('cartPopup');
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cart = [];
+
     function toggleContact() {
-      const popup = document.getElementById('contactPopup');
-      popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+      contactPopup.style.display = contactPopup.style.display === 'block' ? 'none' : 'block';
+      cartPopup.style.display = 'none';
     }
 
-    function openCart() {
-      alert('Your cart is empty.');
+    function toggleCart() {
+      cartPopup.style.display = cartPopup.style.display === 'block' ? 'none' : 'block';
+      contactPopup.style.display = 'none';
+      updateCartDisplay();
+    }
+
+    function addToCart(item, price) {
+      cart.push({ item, price });
+      updateCartDisplay();
+      alert(`${item} added to cart.`);
+    }
+
+    function updateCartDisplay() {
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = 'Your cart is empty 💼';
+      } else {
+        cartItemsContainer.innerHTML = cart.map((c, index) => `<div>${c.item} - $${c.price} <button onclick="removeFromCart(${index})">❌</button></div>`).join('');
+      }
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartDisplay();
+    }
+
+    function goToConfirmation() {
+      if (cart.length === 0) {
+        alert('Cart is empty.');
+        return;
+      }
+      const total = cart.reduce((sum, c) => sum + c.price, 0);
+      window.location.href = `confirm.html?price=${total}`;
     }
   </script>
 </body>
