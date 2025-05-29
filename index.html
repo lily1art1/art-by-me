@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Art By Me</title>
   <link rel="icon" type="image/png" href="favicon.png.png">
-
   <style>
     body {
       background-image: url('https://i.pinimg.com/736x/0e/a3/61/0ea3610815d34274c68a3663f4047046.jpg');
@@ -26,7 +25,6 @@
       background: rgba(255, 230, 240, 0.6);
       z-index: -1;
     }
-
     h1 {
       color: #d67da0;
       margin-bottom: 40px;
@@ -36,7 +34,6 @@
     .profile {
       margin-bottom: 40px;
     }
-
     .profile-img-wrapper {
       display: inline-block;
       padding: 8px;
@@ -72,7 +69,7 @@
       color: #d67da0;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       background: linear-gradient(to right, #ffb6c1, #ffa7d1);
       padding: 6px 12px;
       border-radius: 20px;
@@ -96,12 +93,10 @@
       border-radius: 4px;
     }
 
-    /* GALLERY GRID 💕 */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
-      justify-content: center;
       padding: 0 10px;
       margin-bottom: 40px;
     }
@@ -141,15 +136,41 @@
     }
 
     footer {
-      margin-top: 50px;
-      color: #888;
+      margin-top: 40px;
       font-size: 0.9rem;
+      color: #555;
     }
+    .art-piece {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(214, 125, 160, 0.4);
+  opacity: 0;
+  transform: scale(0.95);
+  animation: fadeInZoom 0.8s ease forwards;
+}
+
+.art-piece:nth-child(1) { animation-delay: 0.1s; }
+.art-piece:nth-child(2) { animation-delay: 0.2s; }
+.art-piece:nth-child(3) { animation-delay: 0.3s; }
+.art-piece:nth-child(4) { animation-delay: 0.4s; }
+.art-piece:nth-child(5) { animation-delay: 0.5s; }
+.art-piece:nth-child(6) { animation-delay: 0.6s; }
+.art-piece:nth-child(7) { animation-delay: 0.7s; }
+
+@keyframes fadeInZoom {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
   </style>
 </head>
 <body>
 
   <h1>Welcome to My Art Gallery 💖</h1>
+
   <div class="profile">
     <div class="profile-img-wrapper">
       <img src="https://github.com/lily1art1/art-by-me/blob/main/7e3fdcd5f095f369a536afec8dd22e95.jpg?raw=true" alt="My Profile Picture" />
@@ -163,9 +184,7 @@
     <p style="font-style: italic; color: #555;">Digital Artist💕</p>
   </div>
 
-  <!-- 💖 ART GALLERY STARTS HERE 💖 -->
   <div class="gallery">
-
     <div class="art-piece">
       <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
       <a href="confirm.html?price=4" class="pay-button">Pay $4 Now</a>
@@ -200,12 +219,13 @@
       <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7" />
       <a href="confirm.html?price=6" class="pay-button">Pay $6 Now</a>
     </div>
-
   </div>
 
   <footer>
     &copy; 2025 by Lily1Art | All art is original 💕
   </footer>
+
 </body>
 </html>
+
 
