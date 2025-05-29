@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Art By Me</title>
-  <link rel="icon" type="image/png" href="favicon.png.png" />
+  <link rel="icon" type="image/png" href="favicon.png.png">
   <style>
     body {
       background-color: white;
@@ -59,9 +59,6 @@
       padding: 10px;
       text-align: center;
       transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
     .art-card:hover {
       transform: scale(1.03);
@@ -72,12 +69,12 @@
       border-radius: 10px;
     }
     .price {
-      margin: 8px 0 6px 0;
-      font-weight: bold;
       color: #d67da0;
-      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 10px;
     }
     .add-to-cart {
+      margin-top: 8px;
       background-color: #fbb6ce;
       color: white;
       padding: 10px 20px;
@@ -85,14 +82,12 @@
       border-radius: 25px;
       font-weight: bold;
       cursor: pointer;
-      width: 100%;
-      max-width: 220px;
       transition: background-color 0.3s ease;
     }
     .add-to-cart:hover {
-      background-color: #e590b3;
+      background-color: #e06ba8;
     }
-    .contact-popup, .cart-popup {
+    .contact-popup {
       display: none;
       position: fixed;
       top: 70px;
@@ -114,6 +109,129 @@
       width: 18px;
       margin-right: 6px;
     }
+    /* CART SIDE PANEL */
+    .cart-popup {
+      position: fixed;
+      top: 0;
+      right: -400px; /* hidden by default */
+      width: 360px;
+      height: 100%;
+      background: white;
+      box-shadow: -4px 0 15px rgba(214, 125, 160, 0.3);
+      border-left: 2px solid #ff94c2;
+      padding: 20px;
+      box-sizing: border-box;
+      z-index: 1100;
+      transition: right 0.4s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-popup.active {
+      right: 0;
+    }
+    .cart-header {
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: #d67da0;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .close-cart-btn {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #d67da0;
+    }
+    .cart-items {
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 15px;
+    }
+    .cart-item-details {
+      flex-grow: 1;
+    }
+    .cart-item-name {
+      font-weight: 600;
+      margin: 0 0 5px;
+      color: #444;
+    }
+    .cart-item-price {
+      color: #d67da0;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .quantity-controls button {
+      border: 1px solid #d67da0;
+      background: none;
+      color: #d67da0;
+      font-weight: bold;
+      border-radius: 5px;
+      width: 26px;
+      height: 26px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .quantity-controls span {
+      min-width: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .remove-item-btn {
+      background: none;
+      border: none;
+      color: #ff94c2;
+      cursor: pointer;
+      font-size: 1.2rem;
+      margin-left: 10px;
+      transition: color 0.2s ease;
+    }
+    .remove-item-btn:hover {
+      color: #d1407f;
+    }
+    .cart-total {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #d67da0;
+      margin-top: 15px;
+      text-align: right;
+    }
+    .pay-btn {
+      background-color: #fbb6ce;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+    .pay-btn:hover {
+      background-color: #e06ba8;
+    }
     footer {
       text-align: center;
       padding: 20px;
@@ -124,129 +242,48 @@
 </head>
 <body>
   <header>
-    <h1>welcome to my art gallery 💖</h1>
+    <h1>Art By Me 💖</h1>
     <div class="icons">
       <button class="icon-btn" onclick="toggleCart()">
-        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" />
+        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart">
       </button>
       <button class="icon-btn" onclick="toggleContact()">
-        <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Contact" />
+        <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Contact">
       </button>
     </div>
   </header>
 
   <div class="contact-popup" id="contactPopup">
     <div class="popup-item">
-      <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email" /> lily1.art1@gmail.com
+      <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email"> lily1.art1@gmail.com
     </div>
     <div class="popup-item">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
-      @<a href="https://www.instagram.com/lily1_art1/" target="_blank">lily1_art1</a>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"> @<a href="https://www.instagram.com/lily1_art1/" target="_blank">lily1_art1</a>
     </div>
   </div>
 
   <div class="cart-popup" id="cartPopup">
-    <div id="cartItems">Your cart is empty 💼</div>
-    <button onclick="goToConfirmation()" class="add-to-cart" style="margin-top: 10px;">Pay</button>
+    <div class="cart-header">
+      Your Cart
+      <button class="close-cart-btn" onclick="toggleCart()">×</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p style="color:#888; text-align:center; margin-top: 50px;">Your cart is empty 💼</p>
+    </div>
+    <div class="cart-total" id="cartTotal">Total: $0</div>
+    <button class="pay-btn" onclick="goToConfirmation()">Pay</button>
   </div>
 
   <div class="gallery" id="gallery">
     <div class="art-card">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
+      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1">
       <div class="price">$4</div>
-      <button class="add-to-cart" onclick="addToCart('Art 1', 4)">Add to Cart</button>
+      <button class="add-to-cart" onclick="addToCart('Art 1', 4, 'https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png')">Add to Cart</button>
     </div>
     <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2" />
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2">
       <div class="price">$10</div>
-      <button class="add-to-cart" onclick="addToCart('Art 2', 10)">Add to Cart</button>
+      <button class="add-to-cart" onclick="addToCart('Art 2', 10, 'https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true')">Add to Cart</button>
     </div>
     <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3" />
-      <div class="price">$8</div>
-      <button class="add-to-cart" onclick="addToCart('Art 3', 8)">Add to Cart</button>
-    </div>
-    <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled31_20250526145417.png?raw=true" alt="Art 4" />
-      <div class="price">$9</div>
-      <button class="add-to-cart" onclick="addToCart('Art 4', 9)">Add to Cart</button>
-    </div>
-    <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 5" />
-      <div class="price">$12</div>
-      <button class="add-to-cart" onclick="addToCart('Art 5', 12)">Add to Cart</button>
-    </div>
-    <div class="art-card">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 6" />
-      <div class="price">$8</div>
-      <button class="add-to-cart" onclick="addToCart('Art 6', 8)">Add to Cart</button>
-    </div>
-    <div class="art-card">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7" />
-      <div class="price">$6</div>
-      <button class="add-to-cart" onclick="addToCart('Art 7', 6)">Add to Cart</button>
-    </div>
-  </div>
-
-  <footer>&copy; 2025 by Lily1Art | All art is original 💕</footer>
-
-  <script>
-    const contactPopup = document.getElementById('contactPopup');
-    const cartPopup = document.getElementById('cartPopup');
-    const cartItemsContainer = document.getElementById('cartItems');
-    const cart = [];
-
-    function toggleContact() {
-      contactPopup.style.display = contactPopup.style.display === 'block' ? 'none' : 'block';
-      cartPopup.style.display = 'none';
-    }
-
-    function toggleCart() {
-      cartPopup.style.display = cartPopup.style.display === 'block' ? 'none' : 'block';
-      contactPopup.style.display = 'none';
-      updateCartDisplay();
-    }
-
-    function addToCart(item, price) {
-  cart.push({ item, price });
-  updateCartDisplay();
-  // Show a little subtle message inside the cart popup instead of alert
-  const message = document.createElement('div');
-  message.textContent = `${item} added to cart! 💖`;
-  message.style.color = '#d67da0';
-  message.style.fontWeight = 'bold';
-  message.style.marginTop = '10px';
-  cartPopup.appendChild(message);
-  setTimeout(() => {
-    message.remove();
-  }, 2000);
-}
-
-
-    function updateCartDisplay() {
-      if (cart.length === 0) {
-        cartItemsContainer.innerHTML = 'Your cart is empty 💼';
-      } else {
-        cartItemsContainer.innerHTML = cart
-          .map((c, index) => `<div>${c.item} - $${c.price} <button onclick="removeFromCart(${index})">❌</button></div>`)
-          .join('');
-      }
-    }
-
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      updateCartDisplay();
-    }
-
-    function goToConfirmation() {
-      if (cart.length === 0) {
-        alert('Cart is empty.');
-        return;
-      }
-      const total = cart.reduce((sum, c) => sum + c.price, 0);
-      window.location.href = `confirm.html?price=${total}`;
-    }
-  </script>
-</body>
-</html>
-
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt
