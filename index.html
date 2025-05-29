@@ -2,171 +2,183 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Art By Me</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" type="image/png" href="favicon.png.png">
   <style>
-    * {
-      box-sizing: border-box;
-    }
     body {
-      margin: 0;
+      background-image: url('https://i.pinimg.com/736x/0e/a3/61/0ea3610815d34274c68a3663f4047046.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fff0f5;
       color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 230, 240, 0.6);
+      z-index: -1;
     }
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      padding: 15px 20px;
       background: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 10px rgba(214, 125, 160, 0.2);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
     }
     header h1 {
       color: #d67da0;
       margin: 0;
-      font-size: 1.5rem;
     }
-    .icons {
+    .header-icons {
       display: flex;
-      gap: 20px;
       align-items: center;
+      gap: 15px;
     }
-    .icon-link {
-      color: #d67da0;
-      font-size: 1.3rem;
-      text-decoration: none;
-      transition: color 0.3s;
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
     }
-    .icon-link:hover {
-      color: #ff94c2;
+    .icon-btn img {
+      width: 28px;
+      height: 28px;
     }
     .contact-popup {
-      position: absolute;
-      top: 60px;
-      right: 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      padding: 15px;
       display: none;
-    }
-    .contact-popup p {
-      margin: 10px 0;
+      position: absolute;
+      right: 20px;
+      top: 70px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       font-size: 0.95rem;
+    }
+    .contact-popup a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #d67da0;
+      margin-bottom: 8px;
+    }
+    .contact-popup a img {
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
     }
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
       padding: 20px;
     }
     .art-piece {
       background: white;
-      padding: 10px;
       border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(214, 125, 160, 0.4);
+      padding: 15px;
       text-align: center;
-      animation: fadeIn 1s ease-in;
+      animation: fadeIn 1s ease;
     }
     .art-piece img {
       width: 100%;
+      height: 280px;
+      object-fit: contain;
       border-radius: 10px;
-      height: auto;
+      background: white;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(214, 125, 160, 0.4);
     }
     .pay-button {
-      margin-top: 10px;
       display: inline-block;
       background-color: #ff94c2;
       color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 25px;
       text-decoration: none;
+      font-weight: bold;
+      margin-top: 10px;
       transition: background-color 0.3s ease;
     }
     .pay-button:hover {
       background-color: #e06ba8;
     }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+      background: white;
+    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #888;
-      font-size: 0.9rem;
+
+    @media (min-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1024px) {
+      .gallery {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>My Art Gallery 💖</h1>
-    <div class="icons">
-      <a href="#" class="icon-link" id="contactToggle"><i class="fas fa-envelope"></i></a>
-      <a href="cart.html" class="icon-link"><i class="fas fa-shopping-cart"></i></a>
+    <h1>My Art Gallery</h1>
+    <div class="header-icons">
+      <button class="icon-btn" onclick="toggleContact()">
+        <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Contact">
+      </button>
+      <button class="icon-btn" onclick="openCart()">
+        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart">
+      </button>
     </div>
-    <div class="contact-popup" id="contactPopup">
-      <p><i class="fas fa-envelope"></i> lily1art1@example.com</p>
-      <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/lily1_art1/" target="_blank">@lily1_art1</a></p>
+    <div id="contactPopup" class="contact-popup">
+      <a href="mailto:wiamklilch3@gmail.com" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"> wiamklilch3@gmail.com
+      </a>
+      <a href="https://www.instagram.com/lily1_art1/" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"> @lily1_art1
+      </a>
     </div>
   </header>
 
-  <div class="gallery">
+  <main class="gallery">
     <div class="art-piece">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1">
-      <a href="confirm.html?price=4" class="pay-button">Pay $4</a>
+      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
+      <a href="confirm.html?price=4" class="pay-button">Pay $4 Now</a>
     </div>
-    <div class="art-piece">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2">
-      <a href="confirm.html?price=10" class="pay-button">Pay $10</a>
-    </div>
-    <div class="art-piece">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3">
-      <a href="confirm.html?price=8" class="pay-button">Pay $8</a>
-    </div>
-    <div class="art-piece">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled31_20250526145417.png?raw=true" alt="Art 4">
-      <a href="confirm.html?price=9" class="pay-button">Pay $9</a>
-    </div>
-    <div class="art-piece">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 5">
-      <a href="confirm.html?price=12" class="pay-button">Pay $12</a>
-    </div>
-    <div class="art-piece">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 6">
-      <a href="confirm.html?price=8" class="pay-button">Pay $8</a>
-    </div>
-    <div class="art-piece">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7">
-      <a href="confirm.html?price=6" class="pay-button">Pay $6</a>
-    </div>
-  </div>
+    <!-- Repeat more art pieces as needed -->
+  </main>
 
   <footer>
     &copy; 2025 by Lily1Art | All art is original 💕
   </footer>
 
   <script>
-    const contactToggle = document.getElementById('contactToggle');
-    const contactPopup = document.getElementById('contactPopup');
+    function toggleContact() {
+      const popup = document.getElementById('contactPopup');
+      popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+    }
 
-    contactToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      contactPopup.style.display = contactPopup.style.display === 'block' ? 'none' : 'block';
-    });
-
-    window.addEventListener('click', (e) => {
-      if (!contactPopup.contains(e.target) && e.target !== contactToggle) {
-        contactPopup.style.display = 'none';
-      }
-    });
+    function openCart() {
+      alert('Your cart is empty.');
+    }
   </script>
 </body>
 </html>
+
