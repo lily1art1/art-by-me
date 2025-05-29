@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,19 +26,95 @@
       background: rgba(255, 230, 240, 0.6);
       z-index: -1;
     }
-    .art-piece {
+
+    h1 {
+      color: #d67da0;
       margin-bottom: 40px;
+      text-shadow: 1px 1px 3px #fff;
+    }
+
+    .profile {
+      margin-bottom: 40px;
+    }
+
+    .profile-img-wrapper {
+      display: inline-block;
+      padding: 8px;
+      border-radius: 50%;
+      background: conic-gradient(from 180deg at 50% 50%, #ffdef0, #ffd6ec, #ffe8f5, #ffdef0);
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
+      position: relative;
+    }
+
+    .profile-img-wrapper::before {
+      content: "💖";
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 24px;
+      animation: sparkle 2s infinite ease-in-out;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.6; }
+    }
+
+    .profile img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid white;
+    }
+
+    .insta-link {
+      color: #d67da0;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.4rem;
+      background: linear-gradient(to right, #ffb6c1, #ffa7d1);
+      padding: 6px 12px;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: inline-block;
+    }
+
+    .insta-link:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 170, 204, 0.7);
+      background: linear-gradient(to right, #ff82ab, #ffa3cb);
+      color: white;
+    }
+
+    .insta-icon {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+      margin-right: 8px;
+      border-radius: 4px;
+    }
+
+    /* GALLERY GRID 💕 */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      justify-content: center;
+      padding: 0 10px;
+      margin-bottom: 40px;
+    }
+
+    .art-piece {
       background: rgba(255, 255, 255, 0.8);
       padding: 15px;
       border-radius: 15px;
       box-shadow: 0 4px 12px rgba(214, 125, 160, 0.4);
-      display: inline-block;
-      max-width: 400px;
-      width: 90%;
     }
+
     .art-piece img {
       width: 100%;
-      max-width: 380px;
       height: 280px;
       object-fit: contain;
       border-radius: 10px;
@@ -48,6 +123,7 @@
       padding: 10px;
       box-sizing: border-box;
     }
+
     .pay-button {
       display: inline-block;
       background-color: #ff94c2;
@@ -59,125 +135,72 @@
       margin-top: 10px;
       transition: background-color 0.3s ease;
     }
+
     .pay-button:hover {
       background-color: #e06ba8;
     }
-    h1 {
-      color: #d67da0;
-      margin-bottom: 40px;
-      text-shadow: 1px 1px 3px #fff;
+
+    footer {
+      margin-top: 50px;
+      color: #888;
+      font-size: 0.9rem;
     }
-    .insta-link {
-  color: #d67da0;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.4rem;
-  background: linear-gradient(to right, #ffb6c1, #ffa7d1);
-  padding: 6px 12px;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: inline-block;
-}
-
-.insta-link:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(255, 170, 204, 0.7);
-  background: linear-gradient(to right, #ff82ab, #ffa3cb);
-  color: white;
-}
-
-    .profile {
-      margin-bottom: 40px;
-    }
-    .profile-img-wrapper {
-  display: inline-block;
-  padding: 8px;
-  border-radius: 50%;
-  background: conic-gradient(from 180deg at 50% 50%, #ffdef0, #ffd6ec, #ffe8f5, #ffdef0);
-  box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
-  position: relative;
-}
-
-.profile-img-wrapper::before {
-  content: "💖";
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  font-size: 24px;
-  animation: sparkle 2s infinite ease-in-out;
-}
-
-@keyframes sparkle {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.6; }
-}
-
-.profile img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 4px solid white;
-}
-.insta-icon {
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-  margin-right: 8px;
-  border-radius: 4px;
-}
-
   </style>
 </head>
 <body>
- 
+
   <h1>Welcome to My Art Gallery 💖</h1>
-  <div style="margin-bottom: 40px;">
-  <img src="https://github.com/lily1art1/art-by-me/blob/main/7e3fdcd5f095f369a536afec8dd22e95.jpg?raw=true" alt="My Profile Picture"
-       style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 4px solid #ff94c2; box-shadow: 0 4px 8px rgba(214, 125, 160, 0.4);" />
-  <h2>
-  <a href="https://www.instagram.com/lily1_art1/" target="_blank" class="insta-link">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="insta-icon" />
-    @lily1_art1
-  </a>
-</h2>
-
-  <p style="font-style: italic; color: #555;">Digital Artist💕</p>
-</div>
-
-
-  <div class="art-piece">
-    <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
-    <a href="confirm.html?price=4" class="pay-button">Pay $4 Now</a>
+  <div class="profile">
+    <div class="profile-img-wrapper">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/7e3fdcd5f095f369a536afec8dd22e95.jpg?raw=true" alt="My Profile Picture" />
+    </div>
+    <h2>
+      <a href="https://www.instagram.com/lily1_art1/" target="_blank" class="insta-link">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="insta-icon" />
+        @lily1_art1
+      </a>
+    </h2>
+    <p style="font-style: italic; color: #555;">Digital Artist💕</p>
   </div>
 
-  <div class="art-piece">
-    <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2" />
-    <a href="confirm.html?price=10" class="pay-button">Pay $10 Now</a>
-  </div>
+  <!-- 💖 ART GALLERY STARTS HERE 💖 -->
+  <div class="gallery">
 
-  <div class="art-piece">
-    <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3" />
-    <a href="confirm.html?price=8" class="pay-button">Pay $8 Now</a>
-  </div>
-   <div class="art-piece">
-    <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled31_20250526145417.png?raw=true" alt="Art 4" />
-    <a href="confirm.html?price=9" class="pay-button">Pay $9 Now</a>
-  </div>
-   <div class="art-piece">
-    <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 12" />
-    <a href="confirm.html?price=8" class="pay-button">Pay $12 Now</a>
-  </div>
+    <div class="art-piece">
+      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
+      <a href="confirm.html?price=4" class="pay-button">Pay $4 Now</a>
+    </div>
 
-  <div class="art-piece">
-    <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 6" />
-    <a href="confirm.html?price=8" class="pay-button">Pay $8 Now</a>
-  </div>
+    <div class="art-piece">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2" />
+      <a href="confirm.html?price=10" class="pay-button">Pay $10 Now</a>
+    </div>
 
-  <div class="art-piece">
-    <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7" />
-    <a href="confirm.html?price=6" class="pay-button">Pay $6 Now</a>
+    <div class="art-piece">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3" />
+      <a href="confirm.html?price=8" class="pay-button">Pay $8 Now</a>
+    </div>
+
+    <div class="art-piece">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled31_20250526145417.png?raw=true" alt="Art 4" />
+      <a href="confirm.html?price=9" class="pay-button">Pay $9 Now</a>
+    </div>
+
+    <div class="art-piece">
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 12" />
+      <a href="confirm.html?price=12" class="pay-button">Pay $12 Now</a>
+    </div>
+
+    <div class="art-piece">
+      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 6" />
+      <a href="confirm.html?price=8" class="pay-button">Pay $8 Now</a>
+    </div>
+
+    <div class="art-piece">
+      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7" />
+      <a href="confirm.html?price=6" class="pay-button">Pay $6 Now</a>
+    </div>
+
   </div>
 
   <footer>
@@ -185,3 +208,4 @@
   </footer>
 </body>
 </html>
+
