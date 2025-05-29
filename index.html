@@ -36,10 +36,30 @@
       background: none;
       border: none;
       cursor: pointer;
+      position: relative;
     }
     .icon-btn img {
       width: 24px;
       height: 24px;
+    }
+    /* Cart count badge style */
+    #cartCount {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #d67da0;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      user-select: none;
+      display: flex;
     }
     .gallery {
       display: grid;
@@ -238,7 +258,8 @@
     <h1>welcome to my art gallery 💖</h1>
     <div class="icons">
       <button class="icon-btn" onclick="toggleCart()">
-        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart">
+        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" />
+        <span id="cartCount">0</span>
       </button>
       <button class="icon-btn" onclick="toggleContact()">
         <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Contact">
@@ -269,47 +290,27 @@
     </div>
   </div>
 
- <div class="gallery" id="gallery">
+  <div class="gallery" id="gallery">
     <div class="art-card">
       <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
       <div class="price">Art 1 - $4</div>
-      <button class="add-to-cart" onclick="addToCart('Art 1', 4)">Add to Cart</button>
+      <button class="add-to-cart" onclick="addToCart('Art 1', 4, 'https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png')">Add to Cart</button>
     </div>
     <div class="art-card">
       <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2" />
-      <div class="price">Art 2 -$10</div>
-      <button class="add-to-cart" onclick="addToCart('Art 2', 10)">Add to Cart</button>
+      <div class="price">Art 2 - $10</div>
+      <button class="add-to-cart" onclick="addToCart('Art 2', 10, 'https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true')">Add to Cart</button>
     </div>
     <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3" />
-      <div class="price">Art 3 -$8</div>
-      <button class="add-to-cart" onclick="addToCart('Art 3', 8)">Add to Cart</button>
-    </div>
-    <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled31_20250526145417.png?raw=true" alt="Art 4" />
-      <div class="price">Art 4 -$9</div>
-      <button class="add-to-cart" onclick="addToCart('Art 4', 9)">Add to Cart</button>
-    </div>
-    <div class="art-card">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 5" />
-      <div class="price">Art 5 -$12</div>
-      <button class="add-to-cart" onclick="addToCart('Art 5', 12)">Add to Cart</button>
-    </div>
-    <div class="art-card">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 6" />
-      <div class="price">Art 6 -$8</div>
-      <button class="add-to-cart" onclick="addToCart('Art 6', 8)">Add to Cart</button>
-    </div>
-    <div class="art-card">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7" />
-      <div class="price">Art 7 -$6</div>
-      <button class="add-to-cart" onclick="addToCart('Art 7', 6)">Add to Cart</button>
+      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0010.jpg?raw=true" alt="Art 3" />
+      <div class="price">Art 3 - $15</div>
+      <button class="add-to-cart" onclick="addToCart('Art 3', 15, 'https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0010.jpg?raw=true')">Add to Cart</button>
     </div>
   </div>
 
   <script>
-    const contactPopup = document.getElementById('contactPopup');
     const cartPopup = document.getElementById('cartPopup');
+    const contactPopup = document.getElementById('contactPopup');
     const cartItemsContainer = document.getElementById('cartItems');
     let cart = [];
 
@@ -336,38 +337,60 @@
         cart.push({ item, price, qty: 1, imageUrl });
       }
       updateCartDisplay();
-      if (!cartPopup.classList.contains('active')) {
-        cartPopup.classList.add('active');
-        contactPopup.style.display = 'none';
-      }
+      updateCartCount();
+      // No auto-open of cartPopup here
     }
 
     function updateCartDisplay() {
       if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<p>Your cart is empty 💼</p>';
-      } else {
-        cartItemsContainer.innerHTML = cart.map((c, index) => `
+        cartItemsContainer.innerHTML = "<p>Your cart is empty 💼</p>";
+        updateCartCount();
+        updateTotalPrice();
+        return;
+      }
+      let html = '';
+      cart.forEach((c, index) => {
+        html += `
           <div class="cart-item">
             <img src="${c.imageUrl}" alt="${c.item}" />
             <div class="item-details">
               <p class="item-name">${c.item}</p>
-              <p class="item-price">$${c.price}</p>
+              <p class="item-price">$${c.price} each</p>
               <div class="quantity-controls">
-                <button onclick="changeQuantity(${index}, -1)">−</button>
+                <button onclick="decreaseQuantity(${index})">-</button>
                 <span>${c.qty}</span>
-                <button onclick="changeQuantity(${index}, 1)">+</button>
-                <button class="remove-btn" onclick="removeFromCart(${index})">×</button>
+                <button onclick="increaseQuantity(${index})">+</button>
+                <button class="remove-btn" onclick="removeFromCart(${index})" title="Remove">&times;</button>
               </div>
             </div>
           </div>
-        `).join('');
-      }
-      updateTotal();
+        `;
+      });
+      cartItemsContainer.innerHTML = html;
+      updateTotalPrice();
+      updateCartCount();
     }
 
-    function changeQuantity(index, delta) {
-      cart[index].qty += delta;
-      if (cart[index].qty <= 0) {
+    function updateCartCount() {
+      const cartCount = document.getElementById('cartCount');
+      const totalQty = cart.reduce((sum, c) => sum + c.qty, 0);
+      if (totalQty > 0) {
+        cartCount.style.display = 'flex';
+        cartCount.textContent = totalQty;
+      } else {
+        cartCount.style.display = 'none';
+      }
+    }
+
+    function increaseQuantity(index) {
+      cart[index].qty++;
+      updateCartDisplay();
+    }
+
+    function decreaseQuantity(index) {
+      if (cart[index].qty > 1) {
+        cart[index].qty--;
+      } else {
         cart.splice(index, 1);
       }
       updateCartDisplay();
@@ -378,19 +401,22 @@
       updateCartDisplay();
     }
 
-    function updateTotal() {
+    function updateTotalPrice() {
       const total = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
-      document.querySelector('.total-price').textContent = `Total: $${total}`;
+      const totalPriceElem = document.querySelector('.total-price');
+      totalPriceElem.textContent = `Total: $${total}`;
     }
 
     function goToConfirmation() {
-      if (cart.length === 0) {
-        alert('Your cart is empty.');
+      if(cart.length === 0) {
+        alert("Your cart is empty, babe!");
         return;
       }
-      const total = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
-      window.location.href = `confirm.html?price=${total}`;
+      window.location.href = 'confirmation.html';
     }
+
+    // Initialize badge on page load
+    updateCartCount();
   </script>
 </body>
 </html>
