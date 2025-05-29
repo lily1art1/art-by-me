@@ -1,158 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Art By Me</title>
-  <link rel="icon" type="image/png" href="favicon.png.png">
-
+  <title>Art Gallery Inspired by Kylie Cosmetics</title>
   <style>
+    /* Reset & basics */
     * {
       box-sizing: border-box;
     }
-
     body {
-      background-image: url('https://i.pinimg.com/736x/0e/a3/61/0ea3610815d34274c68a3663f4047046.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
-      padding: 20px;
       margin: 0;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #f8f8f8;
+      color: #222;
       text-align: center;
+      padding: 40px 20px;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(255, 230, 240, 0.6);
-      z-index: -1;
-    }
-
-    /* Wrapper for the main content to get white background and spacing */
     .container {
-      background: white;
-      padding: 30px 20px 50px;
-      border-radius: 20px;
       max-width: 1200px;
-      margin: 0 auto 40px;
-      box-shadow: 0 0 25px rgba(214, 125, 160, 0.3);
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      padding: 40px 30px 60px;
     }
 
     h1 {
-      color: #d67da0;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 3px #fff;
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      letter-spacing: 1.5px;
+      color: #e6007e; /* Kylie pinkish */
     }
 
-    .insta-link {
-      color: #d67da0;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      background: linear-gradient(to right, #ffb6c1, #ffa7d1);
-      padding: 5px 10px;
-      border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Instagram link section */
+    .instagram {
+      margin-bottom: 40px;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      margin-bottom: 15px;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #e6007e;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .instagram:hover {
+      border-color: #e6007e;
+    }
+    .instagram img {
+      width: 20px;
+      height: 20px;
+      filter: invert(38%) sepia(67%) saturate(3312%) hue-rotate(310deg) brightness(97%) contrast(98%);
     }
 
-    .insta-link:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 170, 204, 0.7);
-      background: linear-gradient(to right, #ff82ab, #ffa3cb);
-      color: white;
-    }
-
-    .insta-icon {
-      width: 16px;
-      height: 16px;
-      border-radius: 4px;
-    }
-
+    /* Profile pic */
     .profile-pic {
-      width: 130px;
-      height: 130px;
-      object-fit: cover;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      border: 4px solid #ff94c2;
-      box-shadow: 0 4px 8px rgba(214, 125, 160, 0.4);
-      margin-bottom: 10px;
+      object-fit: cover;
+      margin: 0 auto 25px;
+      box-shadow: 0 4px 15px rgba(230,0,126,0.3);
+      border: 3px solid #e6007e;
+      transition: transform 0.3s ease;
+    }
+    .profile-pic:hover {
+      transform: scale(1.05);
     }
 
-    /* Grid gallery - 3 columns on laptop, 2 columns on phone */
+    /* Grid gallery */
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-      margin-top: 20px;
+      gap: 30px;
       padding: 0 10px;
     }
 
-    .art-piece {
+    /* Each art card */
+    .art-card {
       background: #fff;
-      padding: 15px;
       border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(214, 125, 160, 0.3);
-      opacity: 0;
-      transform: scale(0.95);
-      animation: fadeInZoom 0.8s ease forwards;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 100%;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .art-card:hover {
+      box-shadow: 0 10px 25px rgba(230,0,126,0.3);
     }
 
-    @keyframes fadeInZoom {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .art-piece img {
+    /* Image styling with smooth zoom on hover */
+    .art-card img {
       width: 100%;
       height: auto;
       object-fit: contain;
-      border-radius: 10px;
-      background: white;
-      padding: 10px;
-      box-shadow: 0 4px 8px rgba(214, 125, 160, 0.3);
-      margin-bottom: 12px;
-      flex-grow: 1;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+    .art-card:hover img {
+      transform: scale(1.05);
     }
 
+    /* Pay button */
     .pay-button {
-      background-color: #ff94c2;
+      margin: 15px;
+      background: #e6007e;
       color: white;
-      padding: 10px 20px;
-      border-radius: 25px;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 25px;
+      font-weight: 600;
+      font-size: 1rem;
       text-decoration: none;
-      font-weight: bold;
+      text-align: center;
       transition: background-color 0.3s ease;
-      align-self: center;
-      width: fit-content;
-      box-shadow: 0 3px 8px rgba(224, 107, 168, 0.7);
+      display: block;
     }
-
     .pay-button:hover {
-      background-color: #e06ba8;
+      background: #bf006b;
     }
 
-    footer {
-      font-size: 0.9rem;
-      color: #777;
-    }
-
-    /* Media Queries for responsiveness */
-
-    @media (max-width: 768px) {
+    /* Responsive breakpoints */
+    @media (max-width: 900px) {
       .gallery {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -161,76 +137,70 @@
     @media (max-width: 480px) {
       .gallery {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        padding: 0 5px;
+        gap: 20px;
       }
 
-      .pay-button {
-        padding: 8px 16px;
-        font-size: 0.9rem;
+      .container {
+        padding: 30px 20px 50px;
       }
     }
-
   </style>
 </head>
 <body>
-
   <div class="container">
-    <h1>Welcome to My Art Gallery 💖</h1>
+    <h1>My Art Gallery</h1>
 
     <img
       src="https://github.com/lily1art1/art-by-me/blob/main/7e3fdcd5f095f369a536afec8dd22e95.jpg?raw=true"
-      alt="My Profile Picture"
+      alt="Profile Picture"
       class="profile-pic"
     />
-    <h2>
-      <a href="https://www.instagram.com/lily1_art1/" target="_blank" class="insta-link">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="insta-icon" />
-        @lily1_art1
-      </a>
-    </h2>
-    <p style="font-style: italic; color: #555;">Digital Artist💕</p>
+
+    <a href="https://www.instagram.com/lily1_art1/" target="_blank" class="instagram" rel="noopener noreferrer">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+        alt="Instagram Logo"
+      />
+      @lily1_art1
+    </a>
 
     <div class="gallery">
-      <div class="art-piece">
+      <div class="art-card">
         <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
         <a href="confirm.html?price=4" class="pay-button">Pay $4 Now</a>
       </div>
 
-      <div class="art-piece">
+      <div class="art-card">
         <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2" />
         <a href="confirm.html?price=10" class="pay-button">Pay $10 Now</a>
       </div>
 
-      <div class="art-piece">
+      <div class="art-card">
         <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3" />
         <a href="confirm.html?price=8" class="pay-button">Pay $8 Now</a>
       </div>
 
-      <div class="art-piece">
+      <div class="art-card">
         <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled31_20250526145417.png?raw=true" alt="Art 4" />
         <a href="confirm.html?price=9" class="pay-button">Pay $9 Now</a>
       </div>
 
-      <div class="art-piece">
-        <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 12" />
+      <div class="art-card">
+        <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 5" />
         <a href="confirm.html?price=12" class="pay-button">Pay $12 Now</a>
       </div>
 
-      <div class="art-piece">
+      <div class="art-card">
         <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 6" />
         <a href="confirm.html?price=8" class="pay-button">Pay $8 Now</a>
       </div>
 
-      <div class="art-piece">
+      <div class="art-card">
         <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7" />
         <a href="confirm.html?price=6" class="pay-button">Pay $6 Now</a>
       </div>
     </div>
-
   </div>
-
-  <footer>&copy; 2025 by Lily1Art | All art is original 💕</footer>
-
 </body>
 </html>
+
