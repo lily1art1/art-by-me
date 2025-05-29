@@ -208,10 +208,20 @@
     }
 
     function addToCart(item, price) {
-      cart.push({ item, price });
-      updateCartDisplay();
-      alert(`${item} added to cart.`);
-    }
+  cart.push({ item, price });
+  updateCartDisplay();
+  // Show a little subtle message inside the cart popup instead of alert
+  const message = document.createElement('div');
+  message.textContent = `${item} added to cart! 💖`;
+  message.style.color = '#d67da0';
+  message.style.fontWeight = 'bold';
+  message.style.marginTop = '10px';
+  cartPopup.appendChild(message);
+  setTimeout(() => {
+    message.remove();
+  }, 2000);
+}
+
 
     function updateCartDisplay() {
       if (cart.length === 0) {
