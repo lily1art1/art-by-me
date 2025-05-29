@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Art By Me</title>
   <link rel="icon" type="image/png" href="favicon.png.png">
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       background-image: url('https://i.pinimg.com/736x/0e/a3/61/0ea3610815d34274c68a3663f4047046.jpg');
       background-size: cover;
@@ -14,10 +19,10 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #333;
       padding: 20px;
-      text-align: center;
-      min-height: 100vh;
       margin: 0;
+      text-align: center;
     }
+
     body::before {
       content: "";
       position: fixed;
@@ -25,105 +30,83 @@
       background: rgba(255, 230, 240, 0.6);
       z-index: -1;
     }
+
     h1 {
       color: #d67da0;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       text-shadow: 1px 1px 3px #fff;
-    }
-
-    .profile {
-      margin-bottom: 40px;
-    }
-    .profile-img-wrapper {
-      display: inline-block;
-      padding: 8px;
-      border-radius: 50%;
-      background: conic-gradient(from 180deg at 50% 50%, #ffdef0, #ffd6ec, #ffe8f5, #ffdef0);
-      box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
-      position: relative;
-    }
-
-    .profile-img-wrapper::before {
-      content: "💖";
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      font-size: 24px;
-      animation: sparkle 2s infinite ease-in-out;
-    }
-
-    @keyframes sparkle {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.6; }
-    }
-
-    .profile img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid white;
     }
 
     .insta-link {
       color: #d67da0;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 1rem;
       background: linear-gradient(to right, #ffb6c1, #ffa7d1);
-      padding: 6px 12px;
+      padding: 5px 10px;
       border-radius: 20px;
       box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .insta-link:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
       box-shadow: 0 0 20px rgba(255, 170, 204, 0.7);
       background: linear-gradient(to right, #ff82ab, #ffa3cb);
       color: white;
     }
 
     .insta-icon {
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      margin-right: 8px;
+      width: 16px;
+      height: 16px;
       border-radius: 4px;
     }
 
     .gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 20px;
-      padding: 0 10px;
-      margin-bottom: 40px;
+      margin-top: 20px;
     }
 
     .art-piece {
       background: rgba(255, 255, 255, 0.8);
-      padding: 15px;
+      padding: 10px;
       border-radius: 15px;
       box-shadow: 0 4px 12px rgba(214, 125, 160, 0.4);
+      width: calc(33.33% - 20px);
+      max-width: 300px;
+      opacity: 0;
+      transform: scale(0.95);
+      animation: fadeInZoom 0.8s ease forwards;
+    }
+
+    @keyframes fadeInZoom {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     .art-piece img {
       width: 100%;
-      height: 280px;
+      height: auto;
       object-fit: contain;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(214, 125, 160, 0.4);
       background: white;
-      padding: 10px;
-      box-sizing: border-box;
+      padding: 8px;
+      box-shadow: 0 4px 8px rgba(214, 125, 160, 0.4);
     }
 
     .pay-button {
       display: inline-block;
       background-color: #ff94c2;
       color: white;
-      padding: 10px 20px;
+      padding: 8px 16px;
       border-radius: 25px;
       text-decoration: none;
       font-weight: bold;
@@ -135,46 +118,39 @@
       background-color: #e06ba8;
     }
 
+    @media (max-width: 900px) {
+      .art-piece {
+        width: calc(33.33% - 20px);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .art-piece {
+        width: calc(50% - 20px);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .art-piece {
+        width: calc(100% - 20px);
+      }
+    }
+
     footer {
       margin-top: 40px;
       font-size: 0.9rem;
-      color: #555;
+      color: #777;
     }
-    .art-piece {
-  background: rgba(255, 255, 255, 0.8);
-  padding: 15px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(214, 125, 160, 0.4);
-  opacity: 0;
-  transform: scale(0.95);
-  animation: fadeInZoom 0.8s ease forwards;
-}
-
-.art-piece:nth-child(1) { animation-delay: 0.1s; }
-.art-piece:nth-child(2) { animation-delay: 0.2s; }
-.art-piece:nth-child(3) { animation-delay: 0.3s; }
-.art-piece:nth-child(4) { animation-delay: 0.4s; }
-.art-piece:nth-child(5) { animation-delay: 0.5s; }
-.art-piece:nth-child(6) { animation-delay: 0.6s; }
-.art-piece:nth-child(7) { animation-delay: 0.7s; }
-
-@keyframes fadeInZoom {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
   </style>
 </head>
 <body>
 
   <h1>Welcome to My Art Gallery 💖</h1>
 
-  <div class="profile">
-    <div class="profile-img-wrapper">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/7e3fdcd5f095f369a536afec8dd22e95.jpg?raw=true" alt="My Profile Picture" />
-    </div>
+  <div>
+    <img src="https://github.com/lily1art1/art-by-me/blob/main/7e3fdcd5f095f369a536afec8dd22e95.jpg?raw=true"
+         alt="My Profile Picture"
+         style="width: 120px; height: 120px; object-fit: cover; border-radius: 50%; border: 4px solid #ff94c2; box-shadow: 0 4px 8px rgba(214, 125, 160, 0.4);" />
     <h2>
       <a href="https://www.instagram.com/lily1_art1/" target="_blank" class="insta-link">
         <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="insta-icon" />
@@ -185,47 +161,19 @@
   </div>
 
   <div class="gallery">
-    <div class="art-piece">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" />
-      <a href="confirm.html?price=4" class="pay-button">Pay $4 Now</a>
-    </div>
-
-    <div class="art-piece">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2" />
-      <a href="confirm.html?price=10" class="pay-button">Pay $10 Now</a>
-    </div>
-
-    <div class="art-piece">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3" />
-      <a href="confirm.html?price=8" class="pay-button">Pay $8 Now</a>
-    </div>
-
-    <div class="art-piece">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled31_20250526145417.png?raw=true" alt="Art 4" />
-      <a href="confirm.html?price=9" class="pay-button">Pay $9 Now</a>
-    </div>
-
-    <div class="art-piece">
-      <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 12" />
-      <a href="confirm.html?price=12" class="pay-button">Pay $12 Now</a>
-    </div>
-
-    <div class="art-piece">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 6" />
-      <a href="confirm.html?price=8" class="pay-button">Pay $8 Now</a>
-    </div>
-
-    <div class="art-piece">
-      <img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7" />
-      <a href="confirm.html?price=6" class="pay-button">Pay $6 Now</a>
-    </div>
+    <div class="art-piece"><img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled22_20250525184503.png" alt="Art 1" /><a href="confirm.html?price=4" class="pay-button">Pay $4 Now</a></div>
+    <div class="art-piece"><img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0011.jpg?raw=true" alt="Art 2" /><a href="confirm.html?price=10" class="pay-button">Pay $10 Now</a></div>
+    <div class="art-piece"><img src="https://github.com/lily1art1/art-by-me/blob/main/IMG-20250526-WA0012.jpg?raw=true" alt="Art 3" /><a href="confirm.html?price=8" class="pay-button">Pay $8 Now</a></div>
+    <div class="art-piece"><img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled31_20250526145417.png?raw=true" alt="Art 4" /><a href="confirm.html?price=9" class="pay-button">Pay $9 Now</a></div>
+    <div class="art-piece"><img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled34_20250526153531.png?raw=true" alt="Art 12" /><a href="confirm.html?price=12" class="pay-button">Pay $12 Now</a></div>
+    <div class="art-piece"><img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled19_20250524212918%20(2).png" alt="Art 6" /><a href="confirm.html?price=8" class="pay-button">Pay $8 Now</a></div>
+    <div class="art-piece"><img src="https://raw.githubusercontent.com/lily1art1/art-by-me/main/Untitled12_20250524014829.png" alt="Art 7" /><a href="confirm.html?price=6" class="pay-button">Pay $6 Now</a></div>
   </div>
 
-  <footer>
-    &copy; 2025 by Lily1Art | All art is original 💕
-  </footer>
+  <footer>&copy; 2025 by Lily1Art | All art is original 💕</footer>
 
 </body>
 </html>
+
 
 
