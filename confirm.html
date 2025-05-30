@@ -85,19 +85,20 @@
   
   <button type="submit" class="submit-btn">Confirm Payment</button>
 
-  <div class="success-message" id="successMessage">🎉 Payment successful! Thank you for your order!</div>
+  <div class="success-message" id="successMessage">🎉 confirmation successful! Thank you for your order!</div>
 </form>
 
 <script>
-  function confirmPayment() {
-    const message = document.getElementById('successMessage');
-    message.style.display = 'block';
+ function confirmPayment() {
+  const message = document.getElementById('successMessage');
+  message.style.display = 'block';
 
-    // Redirect after 2 seconds to show the message
-    setTimeout(() => {
-      window.location.href = "pay.html"; // redirect to processing page
-    }, 2000);
-  }
+  // Redirect after 1 second
+  setTimeout(() => {
+    window.location.href = "pay.html"; // or your processing page
+  }, 1000);
+}
+
 </script>
 
 </body>
