@@ -12,19 +12,19 @@
       margin: 0;
       padding: 0;
     }
- .header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  flex-wrap: wrap;
+  padding: 15px 20px;
+  flex-wrap: nowrap; /* Force items to stay on the same row */
 }
 
-.icon-left,
-.icon-right {
+.icon {
   width: 20%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .header-center {
@@ -46,21 +46,35 @@
   margin-top: 5px;
 }
 
-/* Responsive for mobile */
+/* Keep layout same for phones */
 @media (max-width: 600px) {
   .header {
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: nowrap; /* Prevent stacking */
   }
 
-  .icon-left,
-  .icon-right,
+  .icon,
   .header-center {
+    width: auto;
+  }
+
+  .contact-icon {
+    justify-content: flex-start;
+  }
+
+  .cart-icon {
+    justify-content: flex-end;
+  }
+
+  .header {
     width: 100%;
-    justify-content: center;
-    margin: 5px 0;
+    gap: 10px;
+  }
+
+  .header-center {
+    flex-grow: 1;
   }
 }
+
 
     .header-content {
   text-align: center;
@@ -331,10 +345,9 @@
 </head>
 <body>
 <header class="header">
-  <div class="icon-left">
-    <button class="icon-btn" onclick="toggleCart()">
-      <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart">
-      <div id="cartCount"></div>
+  <div class="icon contact-icon">
+    <button class="icon-btn" onclick="toggleContact()">
+      <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Contact">
     </button>
   </div>
 
@@ -343,12 +356,14 @@
     <p class="site-name">by Lily</p>
   </div>
 
-  <div class="icon-right">
-    <button class="icon-btn" onclick="toggleContact()">
-      <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Contact">
+  <div class="icon cart-icon">
+    <button class="icon-btn" onclick="toggleCart()">
+      <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart">
+      <div id="cartCount"></div>
     </button>
   </div>
 </header>
+
 
 
   <div class="contact-popup" id="contactPopup">
