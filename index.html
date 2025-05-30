@@ -27,23 +27,36 @@
   text-align: center;
   flex-grow: 1;
 }
-    .site-title {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* bold & clean font */
-  font-weight: 900;
-  font-size: 2.5rem;
-  margin: 0;
+  .header-center {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.site-title {
+  font-size: 2rem;
   color: black;
-  letter-spacing: 0.1em; /* spaced letters */
+  margin: 0;
+  font-family: 'Georgia', serif;
 }
 
 .site-name {
-  font-family: 'Georgia', serif; /* different, elegant font */
   font-size: 1rem;
-  margin: 4px 0 0 0;
-  color: black;
-  letter-spacing: 0.05em;
-  font-style: italic;
+  color: #555;
+  font-family: 'Segoe UI', sans-serif;
+  margin-top: 5px;
 }
+
+/* Make header layout adapt better for small screens */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .icons {
+    margin-top: 10px;
+  }
+}
+
 
 /* Keep your icons on the right side */
 .icons {
@@ -304,8 +317,8 @@
   </style>
 </head>
 <body>
- <header>
-  <div class="header-content">
+<header>
+  <div class="header-center">
     <h1 class="site-title">LILY'S GALLERY</h1>
     <p class="site-name">by Lily</p>
   </div>
@@ -319,7 +332,6 @@
     </button>
   </div>
 </header>
-
 
   <div class="contact-popup" id="contactPopup">
     <div class="popup-item">
