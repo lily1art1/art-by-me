@@ -8,27 +8,15 @@
     body {
       background: #ffffff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #000;
+      color: #000000;
       padding: 20px;
       text-align: center;
       min-height: 100vh;
       margin: 0;
     }
 
-    h2 {
-      font-size: 2rem;
-      color: #000;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-      color: #333;
-    }
-
     form {
-      background: #fff;
+      background: #ffffff;
       padding: 25px;
       border-radius: 15px;
       max-width: 450px;
@@ -40,15 +28,15 @@
       width: 90%;
       padding: 10px;
       margin: 10px 0;
-      border: 2px solid #000;
+      border: 2px solid #000000;
       border-radius: 8px;
       font-size: 1rem;
-      color: #000;
-      background-color: #fff;
+      color: #000000;
     }
 
-    input::placeholder {
-      color: #555;
+    input[readonly] {
+      background-color: #f2f2f2;
+      cursor: not-allowed;
     }
 
     .submit-btn {
@@ -70,48 +58,47 @@
 
     .success-message {
       margin-top: 20px;
-      color: #000;
+      color: #d67da0;
       font-size: 1.1rem;
       display: none;
     }
 
-    @media (max-width: 480px) {
-      form {
-        padding: 20px;
-      }
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #000;
+    }
 
-      input {
-        width: 100%;
-      }
-
-      h2 {
-        font-size: 1.5rem;
-      }
+    p {
+      font-size: 1rem;
+      color: #333;
     }
   </style>
 </head>
 <body>
-  <h2>Confirm Your Payment</h2>
-  <p>Please fill in your details below to continue.</p>
+  <h2>Almost There! 💖</h2>
+  <p>Just fill in your details before we send you to the payment page!</p>
 
   <form id="paymentForm">
     <input type="text" name="name" placeholder="Your Name" required />
     <input type="email" name="email" placeholder="Your Email" required />
     <input type="text" name="instagram" placeholder="Instagram Username" required />
-    <input type="number" name="amount" id="amountInput" placeholder="Amount to Pay ($)" required />
+    <input type="number" name="amount" id="amountInput" placeholder="Amount to Pay ($)" required readonly />
     <button type="submit" class="submit-btn">Continue</button>
   </form>
 
   <div class="success-message" id="successMessage">
-    💌 Thanks babe! Redirecting to the payment page...
+    💌 Thanks! We're sending you to the payment page...
   </div>
 
   <script>
-    // Autofill amount from URL
+    // Autofill amount from URL and lock it
     const urlParams = new URLSearchParams(window.location.search);
     const price = urlParams.get('price');
     if (price) {
-      document.getElementById('amountInput').value = price;
+      const amountInput = document.getElementById('amountInput');
+      amountInput.value = price;
+      amountInput.readOnly = true;
     }
 
     document.getElementById('paymentForm').addEventListener('submit', function (e) {
