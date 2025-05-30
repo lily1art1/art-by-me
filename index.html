@@ -470,15 +470,18 @@ header {
       cartPopup.classList.remove('active');
     }
 
-    function addToCart(name, price, img) {
-      if (cart[name]) {
-        cart[name].quantity++;
-      } else {
-        cart[name] = { price, quantity: 1, img };
-      }
-      updateCart();
-      // cartPopup.classList.add('active'); // Removed this to stop auto-opening
-    }
+   function addToCart(id, name, price) {
+  // If the item is already in the cart, don't add it again
+  if (cart[id]) {
+    alert("This item is already in your cart, babe 💖");
+    return;
+  }
+
+  // Add the item for the first time
+  cart[id] = { name, price, quantity: 1 };
+  updateCart();
+}
+
 
     function updateCart() {
       cartItemsContainer.innerHTML = '';
