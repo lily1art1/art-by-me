@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Processing Payment</title>
+  <style>
+    /* Center everything vertically and horizontally */
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Spinner style */
+    .spinner {
+      border: 6px solid #eee;
+      border-top: 6px solid #ff4b5c; /* your cute red/pink color */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Text under spinner */
+    .message {
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="spinner"></div>
+  <div class="message">Processing your payment, babe... 💖</div>
+
+  <script>
+    // After 2 seconds, redirect to the payment confirmation page
+    setTimeout(() => {
+      window.location.href = "https://example.com/thank-you"; // Replace with your real payment confirmation link
+    }, 2000);
+  </script>
+</body>
+</html>
