@@ -36,11 +36,30 @@
       background: none;
       border: none;
       cursor: pointer;
+      position: relative;
     }
     .icon-btn img {
       width: 24px;
       height: 24px;
     }
+    #cartCount {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #e06ba8;
+      color: white;
+      font-weight: bold;
+      font-size: 0.75rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+      user-select: none;
+    }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -116,13 +135,12 @@
       margin-right: 6px;
     }
 
-    /* Cart slide-in panel styles */
     .cart-popup {
       position: fixed;
       top: 0;
-      right: -400px; /* hidden */
+      right: -400px;
       width: 350px;
-      height: 80vh; /* limit height */
+      height: 80vh;
       background: white;
       border-left: 3px solid #ff94c2;
       box-shadow: -3px 0 15px rgba(255, 148, 194, 0.5);
@@ -237,29 +255,6 @@
     .pay-btn:hover {
       background-color: #e06ba8;
     }
-
-    /* Cart icon badge */
-    #cartCount {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background: #e06ba8;
-      color: white;
-      font-weight: bold;
-      font-size: 0.75rem;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .icon-btn {
-      position: relative;
-    }
   </style>
 </head>
 <body>
@@ -281,7 +276,8 @@
       <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email"> wiamklilch3@gmail.com
     </div>
     <div class="popup-item">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"> @<a href="https://www.instagram.com/lily1_art1/" target="_blank" rel="noopener noreferrer">lily1_art1</a>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+      @<a href="https://www.instagram.com/lily1_art1/" target="_blank" rel="noopener noreferrer">lily1_art1</a>
     </div>
   </div>
 
@@ -325,21 +321,13 @@
     let cart = {};
 
     function toggleCart() {
-      if (cartPopup.classList.contains('active')) {
-        cartPopup.classList.remove('active');
-      } else {
-        cartPopup.classList.add('active');
-        contactPopup.style.display = 'none';
-      }
+      cartPopup.classList.toggle('active');
+      contactPopup.style.display = 'none';
     }
 
     function toggleContact() {
-      if (contactPopup.style.display === 'block') {
-        contactPopup.style.display = 'none';
-      } else {
-        contactPopup.style.display = 'block';
-        cartPopup.classList.remove('active');
-      }
+      contactPopup.style.display = contactPopup.style.display === 'block' ? 'none' : 'block';
+      cartPopup.classList.remove('active');
     }
 
     function addToCart(name, price, img) {
@@ -349,13 +337,14 @@
         cart[name] = { price, quantity: 1, img };
       }
       updateCart();
-      cartPopup.classList.add('active');
+      // cartPopup.classList.add('active'); // Removed this to stop auto-opening
     }
 
     function updateCart() {
       cartItemsContainer.innerHTML = '';
       let total = 0;
       let totalCount = 0;
+
       for (const [name, item] of Object.entries(cart)) {
         total += item.price * item.quantity;
         totalCount += item.quantity;
@@ -377,21 +366,16 @@
         `;
         cartItemsContainer.appendChild(itemEl);
       }
+
       totalPriceEl.textContent = `$${total.toFixed(2)}`;
-      if (totalCount > 0) {
-        cartCount.style.display = 'flex';
-        cartCount.textContent = totalCount;
-      } else {
-        cartCount.style.display = 'none';
-      }
+      cartCount.textContent = totalCount;
+      cartCount.style.display = totalCount > 0 ? 'flex' : 'none';
     }
 
     function changeQuantity(name, delta) {
       if (!cart[name]) return;
       cart[name].quantity += delta;
-      if (cart[name].quantity <= 0) {
-        delete cart[name];
-      }
+      if (cart[name].quantity <= 0) delete cart[name];
       updateCart();
     }
 
