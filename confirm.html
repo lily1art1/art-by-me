@@ -83,7 +83,8 @@
     <input type="text" name="name" placeholder="Your Name" required />
     <input type="email" name="email" placeholder="Your Email" required />
     <input type="text" name="instagram" placeholder="Instagram Username" required />
-    <input type="number" name="amount" id="amountInput" placeholder="Amount to Pay ($)" required readonly />
+    <input type="text" name="amount" id="amountInput" value="Loading..." readonly />
+
     <button type="submit" class="submit-btn">Continue</button>
   </form>
 
@@ -92,39 +93,44 @@
   </div>
 
   <script>
-    // Autofill amount from URL and lock it
-    const urlParams = new URLSearchParams(window.location.search);
-    const price = urlParams.get('price');
-    if (price) {
-      const amountInput = document.getElementById('amountInput');
-      amountInput.value = price;
-      amountInput.readOnly = true;
-    }
+  // Set the price from URL param to input value
+  const urlParams = new URLSearchParams(window.location.search);
+  const price = urlParams.get('price');
+  const amountInput = document.getElementById('amountInput');
 
-    document.getElementById('paymentForm').addEventListener('submit', function (e) {
-      e.preventDefault();
+  if (price) {
+    amountInput.value = `${price} MAD`; // clearly shows price
+    amountInput.readOnly = true;
+  } else {
+    amountInput.value = '0 MAD';
+    amountInput.readOnly = true;
+  }
 
-      const form = e.target;
-      const formData = new FormData(form);
-      const successMessage = document.getElementById('successMessage');
+  // Handle form submission
+  document.getElementById('paymentForm').addEventListener('submit', function (e) {
+    e.preventDefault();
 
-      fetch("https://formspree.io/f/mzzrloeo", {
-        method: "POST",
-        headers: { 'Accept': 'application/json' },
-        body: formData
-      }).then(response => {
-        if (response.ok) {
-          successMessage.style.display = 'block';
-          setTimeout(() => {
-            window.location.href = "https://streamlabs.com/skrumrl/tip";
-          }, 2000);
-        } else {
-          alert("Oops, something went wrong. Try again?");
-        }
-      }).catch(() => {
-        alert("Connection error! Please try again.");
-      });
+    const form = e.target;
+    const formData = new FormData(form);
+    const successMessage = document.getElementById('successMessage');
+
+    fetch("https://formspree.io/f/mzzrloeo", {
+      method: "POST",
+      headers: { 'Accept': 'application/json' },
+      body: formData
+    }).then(response => {
+      if (response.ok) {
+        successMessage.style.display = 'block';
+        setTimeout(() => {
+          window.location.href = "https://streamlabs.com/skrumrl/tip";
+        }, 2000);
+      } else {
+        alert("Oops, something went wrong. Try again?");
+      }
+    }).catch(() => {
+      alert("Connection error! Please try again.");
     });
-  </script>
+  });
+</script>
 </body>
 </html>
