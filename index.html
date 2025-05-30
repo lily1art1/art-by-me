@@ -401,7 +401,8 @@ header {
     <div class="cart-items" id="cartItems"></div>
     <div class="cart-footer">
       <div class="total-price" id="totalPrice">$0.00</div>
-     <button class="pay-btn" onclick="window.location.href='confirm.html'">Pay</button>
+     <button class="pay-btn" onclick="goToPayment()">Pay</button>
+
 
 
     </div>
@@ -522,6 +523,14 @@ header {
       delete cart[name];
       updateCart();
     }
+    function goToPayment() {
+  let totalAmount = 0;
+  for (const item of Object.values(cart)) {
+    totalAmount += item.price * item.quantity;
+  }
+  window.location.href = "payment.html?price=" + totalAmount.toFixed(2);
+}
+
   </script>
 </body>
 </html>
