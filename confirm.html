@@ -76,58 +76,23 @@
   </style>
 </head>
 <body>
-  <h2>Almost There! 💖</h2>
-  <p>Just fill in your details before we send you to the payment page!</p>
-
-  <form id="paymentForm">
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <input type="text" name="instagram" placeholder="Instagram Username" required />
-    <input type="text" name="amount" id="amountInput" placeholder="Amount to Pay" readonly />
-    <button type="submit" class="submit-btn">Continue</button>
+  <h2>Confirm Your Payment</h2>
+  <p>Please fill in your details to complete your order.</p>
+  <form onsubmit="event.preventDefault(); showSuccess();">
+    <input type="text" placeholder="Full Name" required />
+    <input type="email" placeholder="Email Address" required />
+  
+    
+    <button type="submit" class="submit-btn">Confirm Payment</button>
+    <div class="success-message" id="successMessage">🎉 Payment successful! Thank you for your order!</div>
   </form>
 
-  <div class="success-message" id="successMessage">
-    💌 Thanks! We're sending you to the payment page...
-  </div>
-
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const urlParams = new URLSearchParams(window.location.search);
-      const price = urlParams.get('price');
-      const amountInput = document.getElementById('amountInput');
-
-      if (price) {
-        amountInput.value = `${price} US`;
-      } else {
-        amountInput.value = '0 US';
-      }
-
-      document.getElementById('paymentForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const form = e.target;
-        const formData = new FormData(form);
-        const successMessage = document.getElementById('successMessage');
-
-        fetch("https://formspree.io/f/mzzrloeo", {
-          method: "POST",
-          headers: { 'Accept': 'application/json' },
-          body: formData
-        }).then(response => {
-          if (response.ok) {
-            successMessage.style.display = 'block';
-            setTimeout(() => {
-              window.location.href = "https://streamlabs.com/skrumrl/tip";
-            }, 2000);
-          } else {
-            alert("Oops, something went wrong. Try again?");
-          }
-        }).catch(() => {
-          alert("Connection error! Please try again.");
-        });
-      });
-    });
+    function showSuccess() {
+      const message = document.getElementById('successMessage');
+      message.style.display = 'block';
+    }
   </script>
 </body>
 </html>
+
