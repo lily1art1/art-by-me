@@ -78,32 +78,28 @@
 <body>
   <h2>Confirm Your Payment</h2>
   <p>Please fill in your details to complete your order.</p>
-  <form onsubmit="event.preventDefault(); showSuccess();">
-    <input type="text" placeholder="Full Name" required />
-    <input type="email" placeholder="Email Address" required />
-    <input type="text" placeholder="instagram" required />
+  <form onsubmit="event.preventDefault(); confirmPayment();">
+  <input type="text" placeholder="Full Name" required />
+  <input type="email" placeholder="Email Address" required />
+  <input type="text" placeholder="Instagram" required />
   
-  
-    <a href="pay.html"> <button type="submit" class="submit-btn">Confirm Payment</button></a>
+  <button type="submit" class="submit-btn">Confirm Payment</button>
 
-    <div class="success-message" id="successMessage">🎉 Payment successful! Thank you for your order!</div>
-  </form>
+  <div class="success-message" id="successMessage">🎉 Payment successful! Thank you for your order!</div>
+</form>
 
-  <script>
-    function showSuccess() {
-      const message = document.getElementById('successMessage');
-      message.style.display = 'block';
-    }
-   
+<script>
   function confirmPayment() {
-    // You can add extra validation or logic here before redirecting
-    
-    // Redirect to another page after confirming
-    window.location.href = "pay.html";  // <-- replace with your real link
+    const message = document.getElementById('successMessage');
+    message.style.display = 'block';
+
+    // Redirect after 2 seconds to show the message
+    setTimeout(() => {
+      window.location.href = "pay.html"; // redirect to processing page
+    }, 2000);
   }
+</script>
 
-
-  </script>
 </body>
 </html>
 
