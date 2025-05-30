@@ -79,12 +79,13 @@
   <h2>Confirm Your Payment</h2>
   <p>Please fill in your details to complete your order.</p>
   <form onsubmit="event.preventDefault(); confirmPayment();">
+  <form id="paymentForm" action="https://formspree.io/f/yourformid" method="POST" onsubmit="handleSubmit(event)">
   <input type="text" placeholder="Full Name" required />
   <input type="email" placeholder="Email Address" required />
   <input type="text" placeholder="Instagram" required />
   
   <button type="submit" class="submit-btn">Confirm Payment</button>
-
+  </form>
   <div class="success-message" id="successMessage">🎉 confirmation successful! Thank you for your order!</div>
 </form>
 
