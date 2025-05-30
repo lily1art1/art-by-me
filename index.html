@@ -427,7 +427,9 @@ header {
     <div class="art-card">
       <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled51_20250530020154.png?raw=true" alt="Art 4" />
       <div class="price">Art 4 - $16</div>
-      <button class="add-to-cart" onclick="addToCart('Art 4', 4, 'https://github.com/lily1art1/art-by-me/blob/main/Untitled51_20250530020154.png?raw=true')">Add to Cart</button>
+      
+      <button onclick="addToCart(1, 'Cute Bunny Mug', 12.99, 'https://github.com/lily1art1/art-by-me/blob/main/Untitled51_20250530020154.png?raw=true')">Add to Cart</button>
+
     </div>
     <div class="art-card">
       <img src="https://github.com/lily1art1/art-by-me/blob/main/Untitled42.png?raw=true" alt="Art 5" />
@@ -470,23 +472,48 @@ header {
       cartPopup.classList.remove('active');
     }
 
-   function addToCart(id, name, price) {
-  // If the item is already in the cart, don't add it again
+  function addToCart(id, name, price, image) {
+  // Check if item is already in cart
   if (cart[id]) {
-    alert("This item is already in your cart, babe 💖");
+    alert("That item is already in your cart, kitten 💕");
     return;
   }
 
-  // Add the item for the first time
-  cart[id] = { name, price, quantity: 1 };
+  // Add item to cart (only once)
+  cart[id] = {
+    name: name,
+    price: price,
+    image: image
+  };
+
   updateCart();
 }
 
 
-    function updateCart() {
-      cartItemsContainer.innerHTML = '';
-      let total = 0;
-      let totalCount = 0;
+   function updateCart() {
+  const cartItems = document.getElementById("cart-items");
+  cartItems.innerHTML = "";
+
+  let totalAmount = 0;
+
+  for (let id in cart) {
+    const item = cart[id];
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="${item.image}" alt="${item.name}" width="50" height="50" style="border-radius: 5px;">
+        <span>${item.name} - $${item.price}</span>
+      </div>
+    `;
+
+    totalAmount += item.price;
+    cartItems.appendChild(li);
+  }
+
+  document.getElementById("total-amount").innerText = totalAmount.toFixed(2);
+}
+
 
       for (const [name, item] of Object.entries(cart)) {
         total += item.price * item.quantity;
