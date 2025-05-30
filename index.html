@@ -12,32 +12,48 @@
       margin: 0;
       padding: 0;
     }
-.header {
+.site-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  flex-wrap: nowrap; /* Force items to stay on the same row */
+  padding: 10px 20px;
+  position: relative;
 }
 
-.icon {
-  width: 20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.header-center {
-  width: 60%;
-  text-align: center;
-}
-
+/* Title Style */
 .site-title {
-  font-size: 2rem;
   color: black;
-  margin: 0;
-  font-family: 'Georgia', serif;
+  font-size: 2rem;
+  margin: 0 auto;
+  text-align: center;
+  flex-grow: 1;
 }
+
+/* Group contact & cart together on the right */
+.icon-group {
+  display: flex;
+  gap: 10px;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .site-header {
+    justify-content: space-between;
+  }
+
+  .site-title {
+    font-size: 1.2rem;
+    text-align: left;
+    margin: 0;
+    flex-grow: 0;
+  }
+
+  .icon-group {
+    gap: 8px;
+  }
+}
+
+
 
 .site-name {
   font-size: 1rem;
@@ -344,25 +360,19 @@
   </style>
 </head>
 <body>
-<header class="header">
-  <div class="icon contact-icon">
-    <button class="icon-btn" onclick="toggleContact()">
-      <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Contact">
-    </button>
-  </div>
-
-  <div class="header-center">
-    <h1 class="site-title">LILY'S GALLERY</h1>
+<header class="site-header">
+   <h1 class="site-title">LILY'S GALLERY</h1>
     <p class="site-name">by Lily</p>
-  </div>
-
-  <div class="icon cart-icon">
-    <button class="icon-btn" onclick="toggleCart()">
-      <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart">
-      <div id="cartCount"></div>
-    </button>
+ 
+  <div class="icon-group">
+    <button class="contact-toggle">Contact</button>
+    <button class="cart-toggle">Cart</button>
   </div>
 </header>
+
+    <h1 class="site-title">LILY'S GALLERY</h1>
+    <p class="site-name">by Lily</p>
+ 
 
 
 
