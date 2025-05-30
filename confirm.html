@@ -6,30 +6,51 @@
   <title>Confirm Payment</title>
   <style>
     body {
-      background: #fff0f5;
+      background: #ffffff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
+      color: #000;
       padding: 20px;
       text-align: center;
       min-height: 100vh;
       margin: 0;
     }
+
+    h2 {
+      font-size: 2rem;
+      color: #000;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
     form {
-      background: white;
+      background: #fff;
       padding: 25px;
       border-radius: 15px;
       max-width: 450px;
       margin: 0 auto;
-      box-shadow: 0 4px 12px rgba(214, 125, 160, 0.4);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
+
     input {
       width: 90%;
       padding: 10px;
       margin: 10px 0;
-      border: 2px solid #ff94c2;
+      border: 2px solid #000;
       border-radius: 8px;
       font-size: 1rem;
+      color: #000;
+      background-color: #fff;
     }
+
+    input::placeholder {
+      color: #555;
+    }
+
     .submit-btn {
       background-color: #ff94c2;
       color: white;
@@ -42,20 +63,36 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
+
     .submit-btn:hover {
       background-color: #e06ba8;
     }
+
     .success-message {
       margin-top: 20px;
-      color: #d67da0;
+      color: #000;
       font-size: 1.1rem;
       display: none;
+    }
+
+    @media (max-width: 480px) {
+      form {
+        padding: 20px;
+      }
+
+      input {
+        width: 100%;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h2>Almost There! 💖</h2>
-  <p>Just fill in your details before we send you to the payment page!</p>
+  <h2>Confirm Your Payment</h2>
+  <p>Please fill in your details below to continue.</p>
 
   <form id="paymentForm">
     <input type="text" name="name" placeholder="Your Name" required />
@@ -66,7 +103,7 @@
   </form>
 
   <div class="success-message" id="successMessage">
-    💌 Thanks ! We're sending you to the payment page...
+    💌 Thanks babe! Redirecting to the payment page...
   </div>
 
   <script>
