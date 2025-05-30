@@ -136,130 +136,139 @@
     }
 
     .cart-popup {
-      position: fixed;
-      top: 0;
-      right: -400px;
-      width: 350px;
-      height: 80vh;
-      background: white;
-      border-left: 3px solid #ff94c2;
-      box-shadow: -3px 0 15px rgba(255, 148, 194, 0.5);
-      transition: right 0.4s ease;
-      z-index: 1100;
-      display: flex;
-      flex-direction: column;
-      padding: 15px;
-    }
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 350px;
+  height: 80vh;
+  background: #1f1f1f;
+  color: white;
+  border-left: 3px solid #444;
+  box-shadow: -3px 0 15px rgba(0, 0, 0, 0.5);
+  transition: right 0.4s ease;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 10px 0 0 10px;
+}
+
     .cart-popup.active {
       right: 0;
     }
     .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #ff94c2;
-      padding-bottom: 10px;
-    }
-    .cart-header h3 {
-      color: #d67da0;
-      margin: 0;
-    }
-    .close-cart {
-      background: none;
-      border: none;
-      font-size: 1.6rem;
-      cursor: pointer;
-      color: #d67da0;
-    }
-    .cart-items {
-      flex-grow: 1;
-      overflow-y: auto;
-      margin-top: 10px;
-      max-height: calc(80vh - 140px);
-    }
-    .cart-item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-    .cart-item img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-right: 10px;
-    }
-    .item-details {
-      flex-grow: 1;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+}
+
+.cart-header h3 {
+  color: #f1f1f1;
+  margin: 0;
+}
+   .close-cart {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #ccc;
+}
+  .cart-items {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-top: 10px;
+  max-height: calc(80vh - 140px);
+}
+   .cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+   .cart-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 10px;
+  border: 1px solid #555;
+}
+
+.item-details {
+  flex-grow: 1;
+}
     .item-name {
-      font-weight: 600;
-      margin: 0;
-      color: #333;
-    }
-    .item-price {
-      color: #d67da0;
-      margin: 5px 0;
-    }
-    .quantity-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .quantity-controls button {
-      background: #fbb6ce;
-      border: none;
-      border-radius: 50%;
-      width: 26px;
-      height: 26px;
-      cursor: pointer;
-      color: white;
-      font-weight: bold;
-      font-size: 1.2rem;
-      line-height: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .remove-btn {
-      background: none;
-      border: none;
-      color: #d67da0;
-      font-size: 1.4rem;
-      cursor: pointer;
-      margin-left: 8px;
-    }
-    .cart-footer {
-      border-top: 2px solid #ff94c2;
-      padding-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-shrink: 0;
-    }
-    .total-price {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #d67da0;
-    }
+  font-weight: 600;
+  margin: 0;
+  color: #f1f1f1;
+}
+
+.item-price {
+  color: #bbb;
+  margin: 5px 0;
+}
+ .quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+ .quantity-controls button {
+  background: #444;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+   .remove-btn {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 1.4rem;
+  cursor: pointer;
+  margin-left: 8px;
+}
+   .cart-footer {
+  border-top: 2px solid #333;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.total-price {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #f1f1f1;
+}
     .pay-btn {
-      background-color: #fbb6ce;
-      border: none;
-      border-radius: 25px;
-      padding: 10px 25px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .pay-btn:hover {
-      background-color: #e06ba8;
-    }
+  background-color: #333;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 25px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pay-btn:hover {
+  background-color: #555;
+}
   </style>
 </head>
 <body>
   <header>
-    <h1>welcome to my art gallery 💖</h1>
+    <h1>Lily's art gallery 💖</h1>
     <div class="icons">
       <button class="icon-btn" onclick="toggleCart()">
         <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart">
@@ -289,7 +298,8 @@
     <div class="cart-items" id="cartItems"></div>
     <div class="cart-footer">
       <div class="total-price" id="totalPrice">$0.00</div>
-      <button class="pay-btn" onclick="alert('Payment functionality coming soon!')">Pay</button>
+     <button class="pay-btn" onclick="window.location.href='confirm.html'">Pay</button>
+
     </div>
   </div>
 
